@@ -14,8 +14,11 @@ const TARGETS = [
   { key: 'interest', label: 'Interest form', url: links.interestForm, hint: 'Best for schools and families' },
 ];
 
-const NAVY = '#15324a';
+/* The code is drawn in the logo's own ink so a printed flyer matches the mark. */
+const CARBON = '#111111';
 const CREAM = '#fbfaf4';
+const LEAF = '#3f6b33';
+const OCEAN = '#2f6f9f';
 
 export default function ShareMovement() {
   const canvasRef = useRef(null);
@@ -57,7 +60,7 @@ export default function ShareMovement() {
       errorCorrectionLevel: 'H',
       margin: 2,
       width: size,
-      color: { dark: NAVY, light: CREAM },
+      color: { dark: CARBON, light: CREAM },
     });
 
     const ctx = canvas.getContext('2d');
@@ -122,21 +125,22 @@ export default function ShareMovement() {
 <style>
   @page { size: letter portrait; margin: 0.6in; }
   * { box-sizing: border-box; }
-  body { margin:0; font-family: Inter, -apple-system, "Segoe UI", sans-serif; color:${NAVY};
+  body { margin:0; font-family: Inter, -apple-system, "Segoe UI", sans-serif; color:${CARBON};
          background:${CREAM}; display:flex; align-items:center; justify-content:center; }
   .sheet { width:100%; max-width:7.3in; text-align:center; padding:0.3in 0; }
   .logo { width:3.1in; margin:0 auto 0.22in; display:block; }
-  .kicker { font-size:11pt; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#5f8f4e; margin:0 0 .12in; }
+  .kicker { font-size:11pt; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:${LEAF}; margin:0 0 .12in; }
   h1 { font-size:30pt; font-weight:900; line-height:1.08; letter-spacing:-.01em; margin:0 0 .16in; }
-  p.lede { font-size:12.5pt; line-height:1.5; max-width:5.6in; margin:0 auto .26in; color:#21303b; }
-  .qr { width:3.15in; height:3.15in; border:3px solid ${NAVY}; border-radius:18px; padding:8px; background:${CREAM}; }
+  p.lede { font-size:12.5pt; line-height:1.5; max-width:5.6in; margin:0 auto .26in; color:${CARBON}; }
+  /* The logo's keyline box, around the code. */
+  .qr { width:3.15in; height:3.15in; border:3px solid ${CARBON}; border-radius:10px; padding:8px; background:${CREAM}; }
   .cta { font-size:15pt; font-weight:800; margin:.2in 0 .06in; }
-  .url { font-size:12pt; font-weight:700; color:#2f6f9f; word-break:break-all; }
-  .foot { margin-top:.24in; font-size:9.5pt; color:#61707b; line-height:1.5; }
+  .url { font-size:12pt; font-weight:700; color:${OCEAN}; word-break:break-all; }
+  .foot { margin-top:.24in; font-size:9.5pt; color:#5a6066; line-height:1.5; }
   @media print { .no-print { display:none !important; } body { background:#fff; } }
   .no-print { margin-top:.3in; }
-  .no-print button { font:inherit; font-weight:700; padding:10px 22px; border-radius:999px;
-                     border:0; background:${NAVY}; color:#fff; cursor:pointer; }
+  .no-print button { font:inherit; font-weight:800; padding:10px 22px; border-radius:999px;
+                     border:0; background:${CARBON}; color:#fff; cursor:pointer; }
 </style></head><body><div class="sheet">
   <img class="logo" src="/brand/soloup-logo.png" alt="${org.name} — ${org.tagline}">
   <p class="kicker">${org.heroKicker}</p>
