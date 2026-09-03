@@ -45,8 +45,22 @@ export const contact = {
   email: null, // e.g. 'hello@soloup.org'
   phone: null, // e.g. '(480) 555-0134'
   addressLines: null, // e.g. ['Queen Creek Botanical Gardens', 'Queen Creek, AZ 85142']
-  ein: null, // e.g. '00-0000000' — for the 501(c)(3) line in the footer
+  ein: null, // e.g. '00-0000000' — adds the EIN to the 501(c)(3) footer line
 };
+
+/*
+ * Confirmed on the Cultivate Goodness donation form, so it can be stated
+ * without an EIN: "Cultivate Goodness, Inc. is a federally recognized 501(c)(3)
+ * nonprofit organization." Donors look for this before giving.
+ */
+export const isRegistered501c3 = true;
+
+/*
+ * The donation form has a "Campaign Fund" selector with a "SoloUp Program"
+ * option. A donor who does not pick it funds Cultivate Goodness generally
+ * rather than SoloUp, and nothing on the current site says so.
+ */
+export const donationFundName = 'SoloUp Program';
 
 /* Anchor navigation. Replaces the six dead `href="##"` links on the current page. */
 export const navLinks = [
@@ -160,6 +174,7 @@ export const audiences = [
     icon: 'Sparkles',
     title: 'For Supporters',
     body: 'Fund coaching, transportation, tools, training, scholarships, and job development for participants who are ready to grow.',
+    note: 'On the donation form, choose the SoloUp Program fund so your gift is earmarked for SoloUp.',
     cta: 'Support the mission',
     href: links.donate,
     tone: 'leaf',
