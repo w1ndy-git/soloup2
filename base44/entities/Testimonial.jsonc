@@ -1,0 +1,78 @@
+{
+  "name": "Testimonial",
+  "type": "object",
+  "description": "A video story from a SoloUp participant, family member, employer partner or volunteer. Staff add and edit these in the Base44 dashboard - no code changes needed.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Person's display name, e.g. 'Marcus R.' Use first name plus initial for participants unless full-name consent is on file."
+    },
+    "role": {
+      "type": "string",
+      "description": "Short descriptor shown under the name, e.g. 'SoloUp participant' or 'Parent' or 'Partner employer, Queen Creek'."
+    },
+    "category": {
+      "type": "string",
+      "description": "Which filter tab this story appears under.",
+      "enum": [
+        "participant",
+        "family",
+        "employer",
+        "volunteer"
+      ],
+      "default": "participant"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "YouTube, Vimeo or direct .mp4 link. Leave blank for a text-only quote card."
+    },
+    "poster_url": {
+      "type": "string",
+      "description": "Optional thumbnail image URL. YouTube links generate one automatically."
+    },
+    "captions_url": {
+      "type": "string",
+      "description": "Optional .vtt captions file, used only for direct video files. YouTube and Vimeo carry their own captions."
+    },
+    "quote": {
+      "type": "string",
+      "description": "Short pull quote shown on the card and above the transcript."
+    },
+    "transcript": {
+      "type": "string",
+      "description": "Full text transcript. Required for accessibility - screen reader users cannot access spoken video content."
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "Video length in seconds, shown as a badge on the card."
+    },
+    "featured": {
+      "type": "boolean",
+      "description": "Show this story larger, at the top of the gallery.",
+      "default": false
+    },
+    "published": {
+      "type": "boolean",
+      "description": "Only published stories appear on the public site.",
+      "default": false
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Lower numbers appear first.",
+      "default": 100
+    },
+    "is_sample": {
+      "type": "boolean",
+      "description": "Marks placeholder content shipped with the design. Sample cards render a visible SAMPLE badge so they can never be mistaken for a real endorsement. Set false (or delete the record) once a real story replaces it.",
+      "default": false
+    },
+    "consent_on_file": {
+      "type": "boolean",
+      "description": "Internal tracking: a signed media release exists for this person. Not shown publicly.",
+      "default": false
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
