@@ -115,6 +115,11 @@ const CASES = [
   },
 ];
 
+/* Batched: the MCP shell caps at 60s, and each case is a real LLM round trip. */
+const FROM = Number(process.argv[2] ?? 0);
+const TO = Number(process.argv[3] ?? CASES.length);
+const SUBSET = CASES.slice(FROM, TO);
+
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
 const page = await ctx.newPage();
@@ -139,7 +144,7 @@ const dlg = await page.evaluate(() => {
 console.log('dialog a11y:', JSON.stringify(dlg));
 
 let pass = 0;
-for (const c of CASES) {
+for (const c of SUBSET) {
   await page.fill('#ask-soloup-input', c.ask);
   await page.click('#ask-soloup-panel form button[type="submit"]');
 
@@ -147,7 +152,7 @@ for (const c of CASES) {
   try {
     await page.waitForFunction(
       (n) => document.querySelectorAll('#ask-soloup-panel li').length >= n && !document.querySelector('[role="status"]'),
-      CASES.indexOf(c) * 2 + 3,
+      SUBSET.indexOf(c) * 2 + 3,
       { timeout: 75000 },
     );
     answer = await page.evaluate(() => {
@@ -172,6 +177,6 @@ for (const c of CASES) {
 await browser.close();
 server.close();
 
-console.log(`\n================ ${pass}/${CASES.length} passed ================`);
+console.log(`\n======== ${pass}/${SUBSET.length} passed (cases ${FROM}..${TO - 1}) ========`);
 if (errors.length) console.log('page errors:\n' + [...new Set(errors)].join('\n'));
-process.exit(pass === CASES.length ? 0 : 1);
+process.exit(pass === SUBSET.length ? 0 : 1);
