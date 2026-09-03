@@ -141,7 +141,7 @@ console.log('dialog a11y:', JSON.stringify(dlg));
 let pass = 0;
 for (const c of CASES) {
   await page.fill('#ask-soloup-input', c.ask);
-  await page.click('button[type="submit"]');
+  await page.click('#ask-soloup-panel form button[type="submit"]');
 
   let answer = '';
   try {
