@@ -120,10 +120,21 @@ qcgardens.org/volunteering/.
 
 Donations go through Cultivate Goodness's donation form.
 
-IMPORTANT and worth telling anyone who asks about giving: the form has a
-"Campaign Fund" selector with a "SoloUp Program" option. A donor who wants their
-gift to go specifically to SoloUp should choose that fund. Otherwise the gift
-supports Cultivate Goodness generally.
+IMPORTANT, and worth telling anyone who asks about giving: the form has two
+dropdowns, "Fund" and "Campaign", and BOTH START BLANK. A donor who leaves them
+alone gives to Cultivate Goodness generally rather than to SoloUp.
+
+To earmark a gift for SoloUp, choose the Fund option labelled exactly:
+  SoloUP (Cultivating Independence)
+and, if they wish, the Campaign option labelled exactly:
+  Solo-Up
+
+Use those exact labels when telling someone what to look for. The fund is NOT
+called "SoloUp Program" — that phrase is a heading elsewhere on the form, and
+someone hunting the dropdown for it will not find it.
+
+The other two Fund options are "Queen Creek Botanical Gardens" and "The Ultimate
+Garden (TUG Fit) Farm School for Kids".
 
 The form offers one-time and monthly giving. Suggested one-time amounts include
 $50, $100, $150, $300, $500 and $1,000. Suggested monthly amounts include $50,
