@@ -9,7 +9,7 @@ const ICONS = { Heart, Building2, Sparkles };
 const TONES = {
   gold: { chip: 'bg-gold/20 text-navy', rule: 'bg-gold' },
   ocean: { chip: 'bg-sky text-ocean', rule: 'bg-ocean' },
-  leaf: { chip: 'grad-lime text-leaf', rule: 'bg-leaf' },
+  leaf: { chip: 'grad-lime text-leaf', rule: 'bg-leafbright' },
 };
 
 export default function GetInvolved() {
@@ -51,7 +51,7 @@ export default function GetInvolved() {
                   <a
                     href={a.href}
                     {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="mt-6 inline-flex items-center gap-2 self-start text-[0.95rem] font-bold text-ocean hover:text-navy"
+                    className="mt-6 inline-flex items-center gap-2 self-start py-1 text-[0.95rem] font-bold text-ocean hover:text-navy"
                   >
                     {a.cta}
                     {external ? (
