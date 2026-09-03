@@ -131,6 +131,33 @@ form in NeonCRM and swap the link in `siteConfig.js` → `audiences` →
 | 11 | Brand green `#5f8f4e` gives only 3.8:1 against white — fails AA for text | Text/gradient green darkened to `#3f6b33` (6.2:1). Original kept as `--leafbright` for decorative fills |
 | 12 | No Open Graph tags — every share rendered as a bare URL | Full OG + Twitter card metadata |
 
+## The Ask SoloUp assistant
+
+A floating assistant on every screen, built on
+`base44.integrations.Core.InvokeLLM` with `claude-sonnet-5`.
+
+It is deliberately **not** a general chatbot. Its entire world is
+`src/lib/knowledge.js`, and every fact in there came from a page you supplied:
+the SoloUp page, the interest form, the donation form, or the logo artwork.
+
+**What it will not do**, and this is the point of the design: it will not state
+or imply eligibility, quote a cost, invent a start date, invent a phone number
+or email, give medical/legal/benefits/tax advice, or promise a place. A
+confident wrong answer to a parent about whether their young adult qualifies is
+worse than no answer, so those topics are fenced off explicitly in
+`UNKNOWNS` and it is instructed to hand off to a human instead.
+
+It also volunteers the SoloUp Program fund whenever anyone asks about giving.
+
+**To change what it knows:** edit `FACTS` in `src/lib/knowledge.js`. Keep each
+entry to something you could point at on a real page — if you cannot source it,
+do not add it. To fence off a new topic, add it to `UNKNOWNS`.
+
+**To see what people ask:** the `AskSoloUpLog` entity records each question and
+answer. Records with `was_unanswered: true` are the interesting ones — a cluster
+of them is a content gap you should fill on the page itself. Visitors are told
+not to enter personal details, and nothing identifying is stored.
+
 ## What was added
 
 - **Video testimonials** — filterable gallery, accessible dialog (focus trap,
@@ -158,7 +185,7 @@ node scripts/qrcheck.mjs  # decodes each QR back out of the canvas
 
 Current status — all passing:
 
-- WCAG AA contrast failures: **0**
+- WCAG AA contrast failures: **0** (re-verified after the palette change)
 - Tap targets under 24px: **0**
 - Heading-level jumps: **0**
 - Clipped or overflowing text: **0**
@@ -171,3 +198,31 @@ Current status — all passing:
 `scripts/qrcheck.mjs` matters more than it looks — putting a logo in the middle
 of a QR code can silently break scanning. It reads the pixels back and decodes
 them, so a broken code fails the check instead of a printed flyer.
+
+### Not yet verified
+
+`scripts/agentcheck.mjs` has **not** been run against a live model, because the
+app is not published and `InvokeLLM` returns 403 until it is. What has been
+verified is the assistant's UI, its dialog accessibility, and that it fails
+cleanly and says why. Run the script once you publish.
+
+## Design: matching the logo
+
+The logo is pure black — a heavy geometric wordmark inside a rectangular
+keyline, with an arrow breaking out through the top of the U. The site is built
+on that rather than on a blue palette:
+
+- `--carbon #111111`, the logo's own ink, carries body copy, headings, buttons,
+  the footer and the start of the dark gradients.
+- **Gold `#f2b84b`** carries the primary actions. On carbon it measures 10.5:1.
+- Navy, ocean and leaf became accents rather than the base.
+- The logo asset itself is now true black rather than tinted, and inverts to
+  white on dark surfaces via `.logo-invert`.
+- `.keyline` reuses the mark's rectangular border — on the hero panel, the
+  assistant window, and around the QR code on the printed flyer.
+- `.eyebrow` sets section labels as a short rule plus letterspaced caps, the way
+  the tagline sits under the wordmark.
+- The breakout arrow is redrawn as an SVG over the hero panel.
+
+If this reads as too stark and you want the navy-led scheme back, it is one
+file: swap `--carbon` back to `21 50 74` in `src/index.css`.
