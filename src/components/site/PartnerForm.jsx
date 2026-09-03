@@ -51,7 +51,7 @@ export default function PartnerForm() {
   return (
     <div id="partner" className="mt-16 scroll-mt-24 overflow-hidden rounded-[2rem] border border-carbon/10 bg-white shadow-brand">
       <div className="grid lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="grad-deep p-8 text-white sm:p-10">
+        <div className="on-dark grad-deep p-8 text-white sm:p-10">
           <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15">
             <Building2 className="h-7 w-7" aria-hidden="true" />
           </span>

@@ -18,7 +18,7 @@ export default function Footer() {
   const hasContact = contact.email || contact.phone || contact.addressLines;
 
   return (
-    <footer className="bg-carbon text-white">
+    <footer className="on-dark bg-carbon text-white">
       <div className="container-brand py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>

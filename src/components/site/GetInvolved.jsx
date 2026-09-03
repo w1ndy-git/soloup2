@@ -71,7 +71,7 @@ export default function GetInvolved() {
         <PartnerForm />
 
         {/* Closing call to action */}
-        <div className="mt-16 overflow-hidden rounded-[2rem] grad-hero px-8 py-14 text-center text-white sm:px-14">
+        <div className="on-dark mt-16 overflow-hidden rounded-[2rem] grad-hero px-8 py-14 text-center text-white sm:px-14">
           <h2 className="mx-auto max-w-3xl font-display text-3xl font-black leading-tight tracking-tight sm:text-5xl">
             {closing.heading}
           </h2>

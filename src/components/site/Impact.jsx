@@ -5,7 +5,7 @@ import { impact } from '@/lib/siteConfig';
 
 export default function Impact() {
   return (
-    <section id="impact" className="scroll-mt-24 grad-hero py-20 text-white sm:py-28">
+    <section id="impact" className="on-dark scroll-mt-24 grad-hero py-20 text-white sm:py-28">
       <div className="container-brand">
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
