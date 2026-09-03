@@ -1,0 +1,55 @@
+{
+  "name": "PartnerInquiry",
+  "type": "object",
+  "description": "An employer or community partner asking about supported internships, job trials or hiring. Exists because the live site pointed the 'For Employers' button at the families interest form, so employer leads had nowhere correct to land. Review these in the Base44 dashboard.",
+  "properties": {
+    "contact_name": {
+      "type": "string",
+      "description": "Name of the person enquiring."
+    },
+    "organization": {
+      "type": "string",
+      "description": "Business or organisation name."
+    },
+    "email": {
+      "type": "string",
+      "description": "Reply-to email address."
+    },
+    "phone": {
+      "type": "string",
+      "description": "Optional phone number."
+    },
+    "interest": {
+      "type": "string",
+      "description": "What kind of partnership they are asking about.",
+      "enum": [
+        "internship",
+        "job_trial",
+        "hiring",
+        "volunteering",
+        "donation_in_kind",
+        "other"
+      ],
+      "default": "internship"
+    },
+    "message": {
+      "type": "string",
+      "description": "Anything else they told us."
+    },
+    "status": {
+      "type": "string",
+      "description": "Follow-up tracking for staff.",
+      "enum": [
+        "new",
+        "contacted",
+        "in_progress",
+        "closed"
+      ],
+      "default": "new"
+    }
+  },
+  "required": [
+    "contact_name",
+    "email"
+  ]
+}

@@ -1,69 +1,106 @@
-import React from "react";
-import { Sprout } from "@/components/site/Botanical";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Heart, Building2, Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
+import { audiences, closing, links } from '@/lib/siteConfig';
+import PartnerForm from './PartnerForm';
 
-const WAYS = [
-  {
-    title: "Donate",
-    desc: "Every gift plants a seed — supplies, stipends, and seeds themselves for a young adult in training.",
-    cta: "Give today",
-    href: "#donate",
-    accent: "bg-petal text-forest",
-  },
-  {
-    title: "Volunteer",
-    desc: "Share a skill in the garden, kitchen, or market. A few hours a month changes a trajectory.",
-    cta: "Lend a hand",
-    href: "#volunteer",
-    accent: "bg-terracotta text-forest",
-  },
-  {
-    title: "Enroll",
-    desc: "Know a young adult ready to grow beyond the classroom? Let's walk the path together.",
-    cta: "Start the journey",
-    href: "#enroll",
-    accent: "bg-forest text-mist",
-  },
-];
+const ICONS = { Heart, Building2, Sparkles };
+
+const TONES = {
+  gold: { chip: 'bg-gold/20 text-navy', rule: 'bg-gold' },
+  ocean: { chip: 'bg-sky text-ocean', rule: 'bg-ocean' },
+  leaf: { chip: 'grad-lime text-leaf', rule: 'bg-leaf' },
+};
 
 export default function GetInvolved() {
   return (
-    <section id="involved" className="relative bg-gradient-to-b from-mist to-forest/5 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-petal font-semibold uppercase tracking-[0.2em] text-xs">Plant a Seed</span>
-          <h2 className="mt-3 font-display font-light text-display text-forest text-balance">
-            Be part of the <span className="italic text-terracotta">unfolding</span>.
+    <section id="involved" className="scroll-mt-24 bg-cream py-20 sm:py-28">
+      <div className="container-brand">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">Get Involved</p>
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+            Help build a future where everyone can contribute.
           </h2>
-          <p className="mt-5 text-lg text-forest/70">
-            However you join, you help a young adult bloom into a life of skills, confidence, and purpose.
+          <p className="mt-6 text-lg leading-relaxed text-stone">
+            SoloUp grows through families, donors, employers, volunteers, and community partners who
+            believe every person deserves a pathway to purpose.
           </p>
         </div>
 
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {WAYS.map((w) => (
-            <div key={w.title} className="group rounded-[2rem] bg-white border border-forest/10 p-8 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 flex flex-col">
-              <span className={`grid place-items-center w-14 h-14 rounded-2xl ${w.accent} mb-5`}>
-                <Sprout className="w-7 h-7" />
-              </span>
-              <h3 className="font-display text-2xl font-semibold text-forest">{w.title}</h3>
-              <p className="mt-3 text-forest/70 leading-relaxed flex-1">{w.desc}</p>
-              <a
-                href={w.href}
-                className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-forest text-mist font-semibold hover:bg-forest-deep transition-colors min-h-[48px]"
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {audiences.map((a, i) => {
+            const Icon = ICONS[a.icon];
+            const tone = TONES[a.tone];
+            const external = !a.internal;
+            return (
+              <motion.article
+                key={a.key}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-70px' }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="flex flex-col overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white shadow-brand transition-transform duration-300 hover:-translate-y-1"
               >
-                {w.cta}
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </a>
-            </div>
-          ))}
+                <span aria-hidden="true" className={`h-1.5 w-full ${tone.rule}`} />
+                <div className="flex flex-1 flex-col p-8">
+                  <span className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl ${tone.chip}`}>
+                    <Icon className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-6 text-xl font-extrabold text-navy">{a.title}</h3>
+                  <p className="mt-3 flex-1 leading-relaxed text-stone">{a.body}</p>
+                  <a
+                    href={a.href}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="mt-6 inline-flex items-center gap-2 self-start text-[0.95rem] font-bold text-ocean hover:text-navy"
+                  >
+                    {a.cta}
+                    {external ? (
+                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    ) : (
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    )}
+                    {external && <span className="sr-only">(opens in a new tab)</span>}
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
 
-        <div className="mt-10 rounded-[2.5rem] bg-forest text-mist p-8 sm:p-12 text-center shadow-2xl shadow-forest/30 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10" aria-hidden="true" style={{ backgroundImage: "radial-gradient(circle at 30% 20%, #FFD166 0, transparent 45%)" }} />
-          <p className="relative font-display text-2xl sm:text-3xl font-light text-balance max-w-2xl mx-auto">
-            "Every seed we plant is a young adult stepping into a life of <span className="text-petal italic">purpose</span>."
-          </p>
-          <p className="relative mt-4 text-mist/70">— The SoloUp Team at Cultivate Goodness</p>
+        {/* Employer intake — the fix for the mis-pointed "For Employers" button. */}
+        <PartnerForm />
+
+        {/* Closing call to action */}
+        <div className="mt-16 overflow-hidden rounded-[2rem] grad-hero px-8 py-14 text-center text-white sm:px-14">
+          <h2 className="mx-auto max-w-3xl font-display text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+            {closing.heading}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">{closing.body}</p>
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href={links.donate}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-bold text-navy shadow-brand-lg transition-transform hover:-translate-y-0.5"
+            >
+              <Heart className="h-5 w-5" aria-hidden="true" />
+              Donate
+            </a>
+            <a
+              href={links.interestForm}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/35 px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-white/10"
+            >
+              Join the interest list
+            </a>
+            <a
+              href="#share"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/35 px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-white/10"
+            >
+              Share the code
+            </a>
+          </div>
         </div>
       </div>
     </section>
