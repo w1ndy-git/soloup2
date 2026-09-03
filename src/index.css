@@ -169,6 +169,42 @@
   }
   .skip-link:focus { top: 0; }
 
-  /* The SoloUp mark is a single navy PNG; invert it for dark surfaces. */
+  /* The SoloUp mark ships as true black; invert it for dark surfaces. */
   .logo-invert { filter: brightness(0) invert(1); }
+
+  /*
+    Motifs lifted from the logo. The mark is a heavy wordmark inside a
+    rectangular keyline, with an arrow breaking out through the top. Both
+    devices are reused as page furniture so the logo reads as part of the
+    design rather than something dropped on top of it.
+  */
+  .keyline {
+    border: 3px solid rgb(var(--carbon));
+    border-radius: 10px;
+  }
+  .keyline-light {
+    border: 3px solid rgb(255 255 255 / 0.85);
+    border-radius: 10px;
+  }
+
+  /* Flat offset shadow, echoing the mark's hard-edged, printed weight. */
+  .block-shadow { box-shadow: 8px 8px 0 rgb(var(--carbon)); }
+  .block-shadow-gold { box-shadow: 8px 8px 0 rgb(var(--gold)); }
+
+  /* Section eyebrow: a short rule, then the label — set like the tagline. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 3px;
+    background: currentColor;
+  }
 }
