@@ -2,18 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://base44.com/logo_v2.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1B4332" />
+
+    <!--
+      ACCESSIBILITY FIX: the live soloup.org page ships
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      which blocks pinch-zoom on iOS and Android. That is a WCAG 2.1 SC 1.4.4
+      failure, and a particularly bad one on a site serving people with
+      disabilities. maximum-scale is removed here — zoom works again.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>SoloUp — Skills. Confidence. Purpose.</title>
+    <meta
+      name="description"
+      content="SoloUp helps young adults with disabilities grow beyond the classroom and into meaningful adult lives through hands-on learning, personalized coaching, real work experience, and supportive community. A Cultivate Goodness program at Queen Creek Botanical Gardens."
+    />
+    <meta name="theme-color" content="#15324a" />
+
+    <link rel="icon" type="image/png" href="/brand/soloup-logo.png" />
+    <link rel="apple-touch-icon" href="/brand/soloup-logo.png" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="description" content="SoloUp — a program of Cultivate Goodness at Queen Creek Botanical Gardens helping young adults with disabilities grow beyond the classroom into meaningful adult lives. Seeds of Limitless Opportunities." />
-    <meta property="og:title" content="SoloUp — Seeds of Limitless Opportunities" />
-    <meta property="og:description" content="Skills. Confidence. Purpose. Helping young adults with disabilities grow beyond the classroom into meaningful adult lives." />
-    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>SoloUp — Seeds of Limitless Opportunities</title>
+
+    <!-- Open Graph / social cards: the previous page had none, so every share
+         rendered as a bare URL. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SoloUp" />
+    <meta property="og:title" content="SoloUp — Seeds of Limitless Opportunities" />
+    <meta
+      property="og:description"
+      content="Helping young adults with disabilities build skills, confidence and purpose through coaching, real work experience and community."
+    />
+    <meta property="og:url" content="https://soloup.org" />
+    <meta property="og:image" content="https://soloup.org/brand/soloup-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SoloUp — Seeds of Limitless Opportunities" />
+    <meta
+      name="twitter:description"
+      content="Helping young adults with disabilities build skills, confidence and purpose."
+    />
   </head>
   <body>
     <div id="root"></div>
