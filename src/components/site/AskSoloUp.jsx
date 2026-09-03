@@ -43,6 +43,7 @@ export default function AskSoloUp() {
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [lastAsk, setLastAsk] = useState('');
   const sessionRef = useRef(newSessionRef());
   const turnRef = useRef(0);
 
@@ -98,6 +99,7 @@ export default function AskSoloUp() {
 
     setError('');
     setInput('');
+    setLastAsk(q);
     setBusy(true);
     const history = messages;
     setMessages((m) => [...m, { role: 'user', content: q }]);
@@ -127,9 +129,18 @@ export default function AskSoloUp() {
           helpful: 'unrated',
         })
         .catch(() => {});
-    } catch {
+    } catch (err) {
+      /*
+        Base44 returns 403 with reason "not_deployed" until the app is
+        published. Worth naming, because otherwise a staff member testing in
+        preview sees a generic failure and assumes the assistant is broken.
+      */
+      const raw = String(err?.message || err || '');
+      const notPublished = /not yet available|not_deployed/i.test(raw);
       setError(
-        "That didn't go through. Try again in a moment — or use the interest form, which reaches a person directly.",
+        notPublished
+          ? 'The assistant goes live once this app is published. Until then, the interest form below reaches a person directly.'
+          : "That didn't go through. Try again — or use the interest form below, which reaches a person directly.",
       );
     } finally {
       setBusy(false);
@@ -261,10 +272,21 @@ export default function AskSoloUp() {
               )}
 
               {error && (
-                <p role="alert" className="flex items-start gap-2 rounded-2xl bg-destructive/10 p-4 text-sm text-destructive">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                  {error}
-                </p>
+                <div role="alert" className="rounded-2xl bg-destructive/10 p-4">
+                  <p className="flex items-start gap-2 text-sm text-destructive">
+                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                    {error}
+                  </p>
+                  {lastAsk && (
+                    <button
+                      type="button"
+                      onClick={() => ask(lastAsk)}
+                      className="mt-3 rounded-full border-2 border-carbon/20 bg-white px-4 py-2 text-sm font-bold text-carbon hover:bg-sky"
+                    >
+                      Try that question again
+                    </button>
+                  )}
+                </div>
               )}
 
               {messages.length === 1 && !busy && (
