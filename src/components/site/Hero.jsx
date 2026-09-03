@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sprout, HandHeart, Briefcase } from 'lucide-react';
-import { org, links } from '@/lib/siteConfig';
+import { org } from '@/lib/siteConfig';
 
 const badges = [
   { icon: Sprout, label: 'Strength-based coaching' },
