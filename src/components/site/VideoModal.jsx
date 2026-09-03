@@ -101,7 +101,6 @@ export default function VideoModal({ item, onClose }) {
           )}
 
           {video.kind === 'file' && (
-            // eslint-disable-next-line jsx-a11y/media-has-caption
             <video src={video.src} controls autoPlay playsInline className="w-full" style={{ aspectRatio: '16 / 9' }}>
               {item.captions_url && <track kind="captions" src={item.captions_url} srcLang="en" label="English" default />}
             </video>
