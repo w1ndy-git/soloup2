@@ -56,11 +56,16 @@ export const contact = {
 export const isRegistered501c3 = true;
 
 /*
- * The donation form has a "Campaign Fund" selector with a "SoloUp Program"
- * option. A donor who does not pick it funds Cultivate Goodness generally
- * rather than SoloUp, and nothing on the current site says so.
+ * On the donation form both the Fund and Campaign dropdowns default to BLANK.
+ * A donor who leaves them alone gives to Cultivate Goodness generally rather
+ * than to SoloUp, and nothing on the current site says so.
+ *
+ * These are the exact option labels a donor sees — do not paraphrase them, or
+ * people will scan the dropdown for wording that is not there. The fund is not
+ * called "SoloUp Program"; that text is a heading elsewhere on the form.
  */
-export const donationFundName = 'SoloUp Program';
+export const donationFundName = 'SoloUP (Cultivating Independence)';
+export const donationCampaignName = 'Solo-Up';
 
 /* Anchor navigation. Replaces the six dead `href="##"` links on the current page. */
 export const navLinks = [
@@ -174,7 +179,7 @@ export const audiences = [
     icon: 'Sparkles',
     title: 'For Supporters',
     body: 'Fund coaching, transportation, tools, training, scholarships, and job development for participants who are ready to grow.',
-    note: 'On the donation form, choose the SoloUp Program fund so your gift is earmarked for SoloUp.',
+    note: 'On the donation form the Fund box starts blank. Choose “SoloUP (Cultivating Independence)” so your gift is earmarked for SoloUp rather than the general fund.',
     cta: 'Support the mission',
     href: links.donate,
     tone: 'leaf',
