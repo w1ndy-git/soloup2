@@ -92,14 +92,28 @@ questions, so specifics should go to staff.
 
 ### 4. Donations do not reach SoloUp unless the donor changes a dropdown
 
-The donation form has a **Campaign Fund** selector with a **"SoloUp Program"**
-option that is **not the default**. Someone who arrives from the SoloUp page,
-clicks Donate and fills the form in without touching that dropdown funds
-Cultivate Goodness generally.
+The donation form has **Fund** and **Campaign** dropdowns and **both start
+blank**. Someone who arrives from the SoloUp page, clicks Donate and fills the
+form in without touching them gives to Cultivate Goodness generally.
 
-The rebuild now says this on the Supporters card, and the assistant volunteers
-it whenever anyone asks about giving. The better long-term fix is a donation
-link that pre-selects the fund, if NeonCRM supports it.
+The exact labels, which matter because a donor scans the list for wording:
+
+| Dropdown | Option to choose |
+| --- | --- |
+| Fund | `SoloUP (Cultivating Independence)` |
+| Campaign | `Solo-Up` (the only option) |
+
+The other two Fund options are `Queen Creek Botanical Gardens` and `The Ultimate
+Garden (TUG Fit) Farm School for Kids`.
+
+Note the fund is **not** called "SoloUp Program" — that phrase is a heading
+beside the tribute checkbox. Telling donors to look for it would send them
+hunting for wording that is not in the list.
+
+The rebuild says this on the Supporters card, and the assistant volunteers it
+whenever anyone asks about giving. The better long-term fix is a donate link
+that pre-selects the fund, if NeonCRM supports a query parameter for it — worth
+asking their support. That would remove the leak entirely.
 
 ### 5. Employer enquiries — `PartnerInquiry` entity
 
@@ -207,6 +221,13 @@ verified is the assistant's UI, its dialog accessibility, and that it fails
 cleanly and says why. Run the script once you publish.
 
 ## Design: matching the logo
+
+`scripts/palette.mjs` enforces this. It walks every rendered element — text,
+backgrounds, borders, gradient stops, SVG fills — and fails if any colour is not
+in the approved set. Current state: **0 off-palette colours**, with carbon
+(the logo's ink) used 460 times, white 230, and gold on the 27 action surfaces.
+Run it after any styling change.
+
 
 The logo is pure black — a heavy geometric wordmark inside a rectangular
 keyline, with an arrow breaking out through the top of the U. The site is built
