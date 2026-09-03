@@ -45,8 +45,8 @@ const mobPath = await grab('mob', 390, 844, true);
 
 /* Compose in the browser: scale both down, sit them side by side. */
 const toDataUri = (p) => `data:image/png;base64,${fs.readFileSync(p).toString('base64')}`;
-const DESK_W = 660;
-const MOB_W = 250;
+const DESK_W = 430;
+const MOB_W = 165;
 
 const ctx = await browser.newContext({ viewport: { width: DESK_W + MOB_W + 60, height: 900 }, deviceScaleFactor: 1 });
 const page = await ctx.newPage();
@@ -59,7 +59,7 @@ await page.setContent(`<!doctype html><html><body style="margin:0;background:#e9
 </div></body></html>`);
 await page.waitForTimeout(800);
 const el = await page.$('body > div');
-await el.screenshot({ path: `${OUT}/sheet.jpg`, type: 'jpeg', quality: 48 });
+await el.screenshot({ path: `${OUT}/sheet.jpg`, type: 'jpeg', quality: 38 });
 await ctx.close();
 await browser.close();
 server.close();
