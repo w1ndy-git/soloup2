@@ -214,7 +214,7 @@ export default function ShareMovement() {
                       value={t.key}
                       checked={target.key === t.key}
                       onChange={() => setTarget(t)}
-                      className="mt-1 h-4 w-4 accent-[#2f6f9f]"
+                      className="mt-0.5 h-6 w-6 shrink-0 accent-[#2f6f9f]"
                     />
                     <span>
                       <span className="block font-bold text-navy">{t.label}</span>
