@@ -1,0 +1,42 @@
+{
+  "name": "AskSoloUpLog",
+  "type": "object",
+  "description": "One question asked of the Ask SoloUp assistant, with the answer it gave. Purpose is twofold: it shows staff what visitors actually want to know (the real FAQ, which should feed back into the page copy), and it lets staff spot any answer the assistant got wrong. No personal data is requested or stored - visitors are told not to include personal details.",
+  "properties": {
+    "question": {
+      "type": "string",
+      "description": "What the visitor asked, verbatim."
+    },
+    "answer": {
+      "type": "string",
+      "description": "What the assistant replied."
+    },
+    "was_unanswered": {
+      "type": "boolean",
+      "description": "True when the assistant had to say the site does not publish that. A cluster of these is a content gap worth filling on the page itself.",
+      "default": false
+    },
+    "helpful": {
+      "type": "string",
+      "description": "Optional thumbs up/down left by the visitor.",
+      "enum": [
+        "yes",
+        "no",
+        "unrated"
+      ],
+      "default": "unrated"
+    },
+    "turn_index": {
+      "type": "number",
+      "description": "Position of this exchange within its conversation, starting at 1.",
+      "default": 1
+    },
+    "session_ref": {
+      "type": "string",
+      "description": "Random per-visit id so a multi-question conversation can be read in order. Not tied to a person and not stable across visits."
+    }
+  },
+  "required": [
+    "question"
+  ]
+}
