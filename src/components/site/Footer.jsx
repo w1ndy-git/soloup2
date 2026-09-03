@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
 
           <nav aria-labelledby="footer-explore">
-            <h2 id="footer-explore" className="text-sm font-bold uppercase tracking-[0.16em] text-lime">
+            <h2 id="footer-explore" className="eyebrow text-lime">
               Explore
             </h2>
             <ul className="mt-5 space-y-3">
@@ -73,7 +73,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Take action</h2>
+            <h2 className="eyebrow text-lime">Take action</h2>
             <ul className="mt-5 space-y-3">
               <li>
                 <a

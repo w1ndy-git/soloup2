@@ -9,7 +9,7 @@ export default function Impact() {
       <div className="container-brand">
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-lime">The Impact</p>
+            <p className="eyebrow text-lime">The Impact</p>
             <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
               {impact.heading}
             </h2>

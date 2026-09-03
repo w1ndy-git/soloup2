@@ -17,7 +17,7 @@ export default function GetInvolved() {
     <section id="involved" className="scroll-mt-24 bg-cream py-20 sm:py-28">
       <div className="container-brand">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">Get Involved</p>
+          <p className="eyebrow text-leaf">Get Involved</p>
           <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Help build a future where everyone can contribute.
           </h2>

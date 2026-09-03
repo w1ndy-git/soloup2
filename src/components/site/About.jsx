@@ -15,7 +15,7 @@ export default function About() {
       <div className="container-brand">
         {/* ── The SoloUp Journey ───────────────────────────────────────── */}
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">The SoloUp Journey</p>
+          <p className="eyebrow text-leaf">The SoloUp Journey</p>
           <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             From potential to purpose.
           </h2>
@@ -80,7 +80,7 @@ export default function About() {
 
         {/* ── Why SoloUp ───────────────────────────────────────────────── */}
         <div className="mx-auto mt-24 max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Why SoloUp</p>
+          <p className="eyebrow text-ocean">Why SoloUp</p>
           <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Adulthood should open doors, not close them.
           </h2>

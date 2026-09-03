@@ -172,7 +172,7 @@ export default function ShareMovement() {
     <section id="share" className="scroll-mt-24 grad-page py-20 sm:py-28">
       <div className="container-brand">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Spread the Word</p>
+          <p className="eyebrow text-ocean">Spread the Word</p>
           <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Put SoloUp in front of the people who can help.
           </h2>
