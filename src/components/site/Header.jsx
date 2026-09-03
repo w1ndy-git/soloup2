@@ -37,7 +37,7 @@ export default function Header() {
     >
       <div className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${sunTemp} to-transparent opacity-30 transition-opacity duration-700`} aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex items-center justify-between h-18 py-4">
+        <div className="flex items-center justify-between h-20 py-4">
           <a href="#top" className="flex items-center gap-2.5 group" aria-label="SoloUp home">
             <span className="grid place-items-center w-11 h-11 rounded-full bg-forest text-petal shadow-lg shadow-forest/30 transition-transform group-hover:scale-105">
               <Sprout className="w-6 h-6 text-petal" />

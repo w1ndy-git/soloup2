@@ -19,12 +19,14 @@ export default function Hero() {
     <section id="top" className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Cinematic background */}
       <div className="absolute inset-0">
-        <Image
-          src={HERO_IMG}
-          alt="Queen Creek Botanical Gardens bathed in golden hour light"
-          className="absolute inset-0 w-full h-full object-cover"
-          fittingType="fill"
-        />
+        <div className="absolute inset-0">
+          <Image
+            src={HERO_IMG}
+            alt="Queen Creek Botanical Gardens bathed in golden hour light"
+            className="w-full h-full"
+            fittingType="fill"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/70 via-forest/55 to-forest-deep/85" aria-hidden="true" />
         <div className="absolute inset-0 backdrop-blur-[3px]" aria-hidden="true" />
       </div>
