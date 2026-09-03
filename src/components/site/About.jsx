@@ -16,7 +16,7 @@ export default function About() {
         {/* ── The SoloUp Journey ───────────────────────────────────────── */}
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">The SoloUp Journey</p>
-          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             From potential to purpose.
           </h2>
         </div>
@@ -36,19 +36,19 @@ export default function About() {
                       'group h-full w-full rounded-[1.5rem] border-2 p-6 text-left transition-all duration-300',
                       isActive
                         ? 'border-leaf bg-white shadow-brand'
-                        : 'border-navy/10 bg-white/60 hover:border-leaf/40 hover:bg-white',
+                        : 'border-carbon/10 bg-white/60 hover:border-leaf/40 hover:bg-white',
                     ].join(' ')}
                   >
                     <span
                       className={[
                         'inline-flex h-11 w-11 items-center justify-center rounded-full text-lg font-black transition-colors',
-                        isActive ? 'bg-leaf text-white' : 'bg-lime text-navy group-hover:bg-leaf/25',
+                        isActive ? 'bg-leaf text-white' : 'bg-lime text-carbon group-hover:bg-leaf/25',
                       ].join(' ')}
                       aria-hidden="true"
                     >
                       {s.n}
                     </span>
-                    <h3 className="mt-4 text-lg font-extrabold text-navy">
+                    <h3 className="mt-4 text-lg font-extrabold text-carbon">
                       <span className="sr-only">Step {s.n}: </span>
                       {s.title}
                     </h3>
@@ -57,7 +57,7 @@ export default function About() {
                       aria-hidden="true"
                       className={[
                         'mt-4 block h-1.5 rounded-full transition-all duration-500',
-                        isActive ? 'bg-leaf' : 'bg-navy/10',
+                        isActive ? 'bg-leaf' : 'bg-carbon/10',
                       ].join(' ')}
                     />
                   </button>
@@ -81,7 +81,7 @@ export default function About() {
         {/* ── Why SoloUp ───────────────────────────────────────────────── */}
         <div className="mx-auto mt-24 max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Why SoloUp</p>
-          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Adulthood should open doors, not close them.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-stone">
@@ -101,12 +101,12 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group rounded-[1.75rem] border border-navy/10 bg-white p-8 shadow-brand transition-transform duration-300 hover:-translate-y-1"
+                className="group rounded-[1.75rem] border border-carbon/10 bg-white p-8 shadow-brand transition-transform duration-300 hover:-translate-y-1"
               >
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl grad-lime text-leaf">
                   <Icon className="h-7 w-7" aria-hidden="true" />
                 </span>
-                <h3 className="mt-6 text-xl font-extrabold text-navy">{p.title}</h3>
+                <h3 className="mt-6 text-xl font-extrabold text-carbon">{p.title}</h3>
                 <p className="mt-3 leading-relaxed text-stone">{p.body}</p>
               </motion.article>
             );

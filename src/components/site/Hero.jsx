@@ -91,7 +91,7 @@ export default function Hero() {
             >
               <a
                 href="#involved"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-bold text-navy shadow-brand-lg transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-bold text-carbon shadow-brand-lg transition-transform hover:-translate-y-0.5"
               >
                 Join the Movement
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />

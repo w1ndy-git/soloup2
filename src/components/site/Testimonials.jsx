@@ -118,7 +118,7 @@ export default function Testimonials() {
       <div className="container-brand">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">In Their Words</p>
-          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Hear it from the people living it.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-stone">
@@ -157,7 +157,7 @@ export default function Testimonials() {
                 aria-pressed={on}
                 className={[
                   'rounded-full px-5 py-2.5 text-[0.95rem] font-bold transition-colors',
-                  on ? 'bg-navy text-white' : 'border-2 border-navy/15 text-navy hover:bg-sky',
+                  on ? 'bg-carbon text-white' : 'border-2 border-carbon/15 text-carbon hover:bg-sky',
                 ].join(' ')}
               >
                 {f.label}
@@ -182,7 +182,7 @@ export default function Testimonials() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: Math.min(i, 5) * 0.06 }}
               >
-                <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white shadow-brand">
+                <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-carbon/10 bg-white shadow-brand">
                   <div className="relative aspect-video overflow-hidden bg-sky">
                     {poster ? (
                       <img
@@ -198,12 +198,12 @@ export default function Testimonials() {
                     )}
 
                     {s.is_sample && (
-                      <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-black uppercase tracking-wider text-navy">
+                      <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-black uppercase tracking-wider text-carbon">
                         Sample
                       </span>
                     )}
                     {duration && (
-                      <span className="absolute bottom-3 right-3 rounded-full bg-navy/85 px-2.5 py-1 text-xs font-bold text-white">
+                      <span className="absolute bottom-3 right-3 rounded-full bg-carbon/85 px-2.5 py-1 text-xs font-bold text-white">
                         {duration}
                       </span>
                     )}
@@ -212,10 +212,10 @@ export default function Testimonials() {
                       <button
                         type="button"
                         onClick={() => setOpenItem(s)}
-                        className="absolute inset-0 flex items-center justify-center bg-navy/25 opacity-0 transition-opacity duration-300 focus-visible:opacity-100 group-hover:opacity-100"
+                        className="absolute inset-0 flex items-center justify-center bg-carbon/25 opacity-0 transition-opacity duration-300 focus-visible:opacity-100 group-hover:opacity-100"
                       >
                         <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-brand-lg">
-                          <Play className="ml-1 h-7 w-7 text-navy" aria-hidden="true" fill="currentColor" />
+                          <Play className="ml-1 h-7 w-7 text-carbon" aria-hidden="true" fill="currentColor" />
                         </span>
                         <span className="sr-only">
                           {s.is_sample ? `Open the ${s.name} placeholder` : `Play the story from ${s.name}`}
@@ -225,7 +225,7 @@ export default function Testimonials() {
                   </div>
 
                   <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-lg font-extrabold text-navy">{s.name}</h3>
+                    <h3 className="text-lg font-extrabold text-carbon">{s.name}</h3>
                     {s.role && <p className="mt-0.5 text-sm font-semibold text-stone">{s.role}</p>}
                     {s.quote && (
                       <p className="mt-4 flex-1 leading-relaxed text-ink">
@@ -236,7 +236,7 @@ export default function Testimonials() {
                       <button
                         type="button"
                         onClick={() => setOpenItem(s)}
-                        className="mt-5 inline-flex items-center gap-2 self-start py-1 text-[0.95rem] font-bold text-ocean hover:text-navy"
+                        className="mt-5 inline-flex items-center gap-2 self-start py-1 text-[0.95rem] font-bold text-ocean hover:text-carbon"
                       >
                         {s.is_sample ? 'What belongs here' : 'Watch the story'}
                         <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -251,7 +251,7 @@ export default function Testimonials() {
 
         {/* Share your story */}
         <div className="mt-14 rounded-[1.75rem] grad-lime p-8 text-center sm:p-10">
-          <h3 className="font-display text-2xl font-black text-navy sm:text-3xl">
+          <h3 className="font-display text-2xl font-black text-carbon sm:text-3xl">
             Been part of SoloUp? Tell people what it did.
           </h3>
           <p className="mx-auto mt-3 max-w-2xl leading-relaxed text-ink">
@@ -262,7 +262,7 @@ export default function Testimonials() {
             href={links.interestForm}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3.5 text-lg font-bold text-white shadow-brand transition-transform hover:-translate-y-0.5"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-carbon px-7 py-3.5 text-lg font-bold text-white shadow-brand transition-transform hover:-translate-y-0.5"
           >
             Share your story
             <ArrowRight className="h-5 w-5" aria-hidden="true" />

@@ -18,7 +18,7 @@ export default function Footer() {
   const hasContact = contact.email || contact.phone || contact.addressLines;
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-carbon text-white">
       <div className="container-brand py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
@@ -170,7 +170,7 @@ export default function Footer() {
             href={links.donate}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-bold text-navy transition-transform hover:-translate-y-0.5"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-bold text-carbon transition-transform hover:-translate-y-0.5"
           >
             <Heart className="h-4.5 w-4.5" aria-hidden="true" />
             Support SoloUp

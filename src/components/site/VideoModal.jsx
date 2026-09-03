@@ -57,7 +57,7 @@ export default function VideoModal({ item, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/80 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-carbon/80 p-4 backdrop-blur-sm"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -69,9 +69,9 @@ export default function VideoModal({ item, onClose }) {
         aria-labelledby="video-modal-title"
         className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[1.75rem] bg-white shadow-brand-lg"
       >
-        <div className="flex items-start justify-between gap-4 border-b border-navy/10 p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-4 border-b border-carbon/10 p-5 sm:p-6">
           <div className="min-w-0">
-            <h2 id="video-modal-title" className="text-xl font-extrabold text-navy">
+            <h2 id="video-modal-title" className="text-xl font-extrabold text-carbon">
               {item.name}
             </h2>
             {item.role && <p className="mt-0.5 text-sm font-semibold text-stone">{item.role}</p>}
@@ -81,13 +81,13 @@ export default function VideoModal({ item, onClose }) {
             type="button"
             onClick={onClose}
             aria-label="Close video"
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-navy/15 text-navy transition-colors hover:bg-sky"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-carbon/15 text-carbon transition-colors hover:bg-sky"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
 
-        <div className="bg-navy">
+        <div className="bg-carbon">
           {video.kind === 'iframe' && (
             <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
               <iframe
@@ -130,7 +130,7 @@ export default function VideoModal({ item, onClose }) {
                 onClick={() => setShowTranscript((v) => !v)}
                 aria-expanded={showTranscript}
                 aria-controls="video-transcript"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-navy/15 px-4 py-2 text-sm font-bold text-navy transition-colors hover:bg-sky"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-carbon/15 px-4 py-2 text-sm font-bold text-carbon transition-colors hover:bg-sky"
               >
                 <FileText className="h-4 w-4" aria-hidden="true" />
                 {showTranscript ? 'Hide transcript' : 'Read transcript'}

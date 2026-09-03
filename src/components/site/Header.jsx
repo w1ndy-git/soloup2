@@ -92,7 +92,7 @@ export default function Header() {
                 aria-current={active === l.href ? 'true' : undefined}
                 className={[
                   'rounded-full px-4 py-2 text-[0.95rem] font-semibold transition-colors',
-                  active === l.href ? 'bg-sky text-navy' : 'text-stone hover:bg-sky/70 hover:text-navy',
+                  active === l.href ? 'bg-sky text-carbon' : 'text-stone hover:bg-sky/70 hover:text-carbon',
                 ].join(' ')}
               >
                 {l.label}
@@ -105,7 +105,7 @@ export default function Header() {
               href={links.interestForm}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border-2 border-navy/15 px-5 py-2.5 text-[0.95rem] font-bold text-navy transition-colors hover:border-navy/40 hover:bg-sky"
+              className="rounded-full border-2 border-carbon/15 px-5 py-2.5 text-[0.95rem] font-bold text-carbon transition-colors hover:border-carbon/40 hover:bg-sky"
             >
               Get started
             </a>
@@ -113,7 +113,7 @@ export default function Header() {
               href={links.donate}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-[0.95rem] font-bold text-white shadow-brand transition-transform hover:-translate-y-0.5 hover:bg-deepsea"
+              className="inline-flex items-center gap-2 rounded-full bg-carbon px-5 py-2.5 text-[0.95rem] font-bold text-white shadow-brand transition-transform hover:-translate-y-0.5 hover:bg-carbonsoft"
             >
               <Heart className="h-4 w-4" aria-hidden="true" />
               Donate
@@ -127,7 +127,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-navy/15 text-navy transition-colors hover:bg-sky lg:hidden"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-carbon/15 text-carbon transition-colors hover:bg-sky lg:hidden"
           >
             {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
           </button>
@@ -139,7 +139,7 @@ export default function Header() {
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="border-t border-navy/10 bg-cream lg:hidden"
+        className="border-t border-carbon/10 bg-cream lg:hidden"
       >
         <nav aria-label="Primary (mobile)" className="container-brand flex flex-col gap-1 py-4">
           {navLinks.map((l) => (
@@ -147,7 +147,7 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={close}
-              className="rounded-2xl px-4 py-3.5 text-lg font-semibold text-navy transition-colors hover:bg-sky"
+              className="rounded-2xl px-4 py-3.5 text-lg font-semibold text-carbon transition-colors hover:bg-sky"
             >
               {l.label}
             </a>
@@ -158,7 +158,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="rounded-2xl border-2 border-navy/15 px-4 py-3.5 text-center text-lg font-bold text-navy"
+              className="rounded-2xl border-2 border-carbon/15 px-4 py-3.5 text-center text-lg font-bold text-carbon"
             >
               Get started
             </a>
@@ -167,7 +167,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-navy px-4 py-3.5 text-center text-lg font-bold text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-carbon px-4 py-3.5 text-center text-lg font-bold text-white"
             >
               <Heart className="h-5 w-5" aria-hidden="true" />
               Donate

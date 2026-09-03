@@ -45,11 +45,11 @@ export default function PartnerForm() {
   };
 
   const field =
-    'w-full rounded-2xl border-2 border-navy/15 bg-white px-4 py-3 text-ink placeholder:text-stone/60 focus:border-ocean';
-  const label = 'block text-sm font-bold text-navy';
+    'w-full rounded-2xl border-2 border-carbon/15 bg-white px-4 py-3 text-ink placeholder:text-stone/60 focus:border-ocean';
+  const label = 'block text-sm font-bold text-carbon';
 
   return (
-    <div id="partner" className="mt-16 scroll-mt-24 overflow-hidden rounded-[2rem] border border-navy/10 bg-white shadow-brand">
+    <div id="partner" className="mt-16 scroll-mt-24 overflow-hidden rounded-[2rem] border border-carbon/10 bg-white shadow-brand">
       <div className="grid lg:grid-cols-[0.85fr_1.15fr]">
         <div className="grad-deep p-8 text-white sm:p-10">
           <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15">
@@ -81,7 +81,7 @@ export default function PartnerForm() {
               <span className="inline-flex h-16 w-16 items-center justify-center rounded-full grad-lime">
                 <Check className="h-8 w-8 text-leaf" aria-hidden="true" />
               </span>
-              <h4 className="mt-5 font-display text-2xl font-black text-navy">Thank you — that came through.</h4>
+              <h4 className="mt-5 font-display text-2xl font-black text-carbon">Thank you — that came through.</h4>
               <p className="mt-3 max-w-sm leading-relaxed text-stone">
                 Someone from SoloUp will be in touch. If it is urgent, reach the team through the
                 Queen Creek Botanical Gardens office.
@@ -89,7 +89,7 @@ export default function PartnerForm() {
             </div>
           ) : (
             <form onSubmit={submit} className="space-y-4" noValidate>
-              <h4 className="font-display text-xl font-black text-navy">Tell us about your workplace</h4>
+              <h4 className="font-display text-xl font-black text-carbon">Tell us about your workplace</h4>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
@@ -142,7 +142,7 @@ export default function PartnerForm() {
               <button
                 type="submit"
                 disabled={state === 'sending'}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy px-7 py-4 text-lg font-bold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-carbon px-7 py-4 text-lg font-bold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60 sm:w-auto"
               >
                 {state === 'sending' && <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />}
                 {state === 'sending' ? 'Sending…' : 'Send to SoloUp'}

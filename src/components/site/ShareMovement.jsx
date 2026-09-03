@@ -173,7 +173,7 @@ export default function ShareMovement() {
       <div className="container-brand">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Spread the Word</p>
-          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             Put SoloUp in front of the people who can help.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-stone">
@@ -185,11 +185,11 @@ export default function ShareMovement() {
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,440px)_1fr] lg:items-start">
           {/* QR panel */}
-          <div className="rounded-[1.75rem] border border-navy/10 bg-white p-6 shadow-brand sm:p-8">
+          <div className="rounded-[1.75rem] border border-carbon/10 bg-white p-6 shadow-brand sm:p-8">
             <div className="mx-auto w-full max-w-[320px]">
               <canvas
                 ref={canvasRef}
-                className="aspect-square w-full rounded-2xl border-2 border-navy/10"
+                className="aspect-square w-full rounded-2xl border-2 border-carbon/10"
                 role="img"
                 aria-label={`QR code linking to ${target.url}`}
               />
@@ -205,7 +205,7 @@ export default function ShareMovement() {
                     key={t.key}
                     className={[
                       'flex cursor-pointer items-start gap-3 rounded-2xl border-2 p-3.5 transition-colors',
-                      target.key === t.key ? 'border-ocean bg-sky' : 'border-navy/10 hover:bg-sky/60',
+                      target.key === t.key ? 'border-ocean bg-sky' : 'border-carbon/10 hover:bg-sky/60',
                     ].join(' ')}
                   >
                     <input
@@ -217,7 +217,7 @@ export default function ShareMovement() {
                       className="mt-0.5 h-6 w-6 shrink-0 accent-[#2f6f9f]"
                     />
                     <span>
-                      <span className="block font-bold text-navy">{t.label}</span>
+                      <span className="block font-bold text-carbon">{t.label}</span>
                       <span className="block text-sm text-stone">{t.hint}</span>
                     </span>
                   </label>
@@ -229,7 +229,7 @@ export default function ShareMovement() {
               <button
                 type="button"
                 onClick={downloadQr}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-carbon px-5 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"
               >
                 <Download className="h-4.5 w-4.5" aria-hidden="true" />
                 Download PNG
@@ -237,7 +237,7 @@ export default function ShareMovement() {
               <button
                 type="button"
                 onClick={printPoster}
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy/15 px-5 py-3 font-bold text-navy transition-colors hover:bg-sky"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-carbon/15 px-5 py-3 font-bold text-carbon transition-colors hover:bg-sky"
               >
                 <Printer className="h-4.5 w-4.5" aria-hidden="true" />
                 Printable flyer
@@ -247,8 +247,8 @@ export default function ShareMovement() {
 
           {/* Share panel */}
           <div className="space-y-6">
-            <div className="rounded-[1.75rem] border border-navy/10 bg-white p-6 shadow-brand sm:p-8">
-              <h3 className="text-xl font-extrabold text-navy">Pick what to say</h3>
+            <div className="rounded-[1.75rem] border border-carbon/10 bg-white p-6 shadow-brand sm:p-8">
+              <h3 className="text-xl font-extrabold text-carbon">Pick what to say</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {shareMessages.map((m) => (
                   <button
@@ -258,7 +258,7 @@ export default function ShareMovement() {
                     aria-pressed={msgKey === m.key}
                     className={[
                       'rounded-full px-4 py-2 text-sm font-bold transition-colors',
-                      msgKey === m.key ? 'bg-navy text-white' : 'border-2 border-navy/15 text-navy hover:bg-sky',
+                      msgKey === m.key ? 'bg-carbon text-white' : 'border-2 border-carbon/15 text-carbon hover:bg-sky',
                     ].join(' ')}
                   >
                     {m.label}
@@ -272,7 +272,7 @@ export default function ShareMovement() {
                 <button
                   type="button"
                   onClick={() => copy(shareText, 'caption')}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-navy/15 px-5 py-2.5 font-bold text-navy transition-colors hover:bg-sky"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-carbon/15 px-5 py-2.5 font-bold text-carbon transition-colors hover:bg-sky"
                 >
                   {copied === 'caption' ? (
                     <Check className="h-4.5 w-4.5 text-leaf" aria-hidden="true" />
@@ -284,7 +284,7 @@ export default function ShareMovement() {
                 <button
                   type="button"
                   onClick={() => copy(target.url, 'url')}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-navy/15 px-5 py-2.5 font-bold text-navy transition-colors hover:bg-sky"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-carbon/15 px-5 py-2.5 font-bold text-carbon transition-colors hover:bg-sky"
                 >
                   {copied === 'url' ? (
                     <Check className="h-4.5 w-4.5 text-leaf" aria-hidden="true" />
@@ -297,7 +297,7 @@ export default function ShareMovement() {
                   <button
                     type="button"
                     onClick={nativeShare}
-                    className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 font-bold text-navy transition-transform hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 font-bold text-carbon transition-transform hover:-translate-y-0.5"
                   >
                     <Share2 className="h-4.5 w-4.5" aria-hidden="true" />
                     Share…
@@ -306,8 +306,8 @@ export default function ShareMovement() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] border border-navy/10 bg-white p-6 shadow-brand sm:p-8">
-              <h3 className="text-xl font-extrabold text-navy">Post it</h3>
+            <div className="rounded-[1.75rem] border border-carbon/10 bg-white p-6 shadow-brand sm:p-8">
+              <h3 className="text-xl font-extrabold text-carbon">Post it</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {socials.map(({ label, Icon, href }) => (
                   <li key={label}>
@@ -315,7 +315,7 @@ export default function ShareMovement() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border-2 border-navy/15 px-4 py-2.5 font-bold text-navy transition-colors hover:bg-sky"
+                      className="inline-flex items-center gap-2 rounded-full border-2 border-carbon/15 px-4 py-2.5 font-bold text-carbon transition-colors hover:bg-sky"
                     >
                       <Icon className="h-4.5 w-4.5" aria-hidden="true" />
                       {label}

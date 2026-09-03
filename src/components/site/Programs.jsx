@@ -18,7 +18,7 @@ export default function Programs() {
       <div className="container-brand">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">How It Works</p>
-          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-carbon sm:text-5xl">
             A supported pathway toward greater independence.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-stone">
@@ -50,7 +50,7 @@ export default function Programs() {
                     'rounded-[1.5rem] border-2 p-6 text-left transition-all duration-300',
                     selected
                       ? 'border-ocean bg-white shadow-brand'
-                      : 'border-navy/10 bg-white/50 hover:border-ocean/40 hover:bg-white',
+                      : 'border-carbon/10 bg-white/50 hover:border-ocean/40 hover:bg-white',
                   ].join(' ')}
                 >
                   <span
@@ -62,7 +62,7 @@ export default function Programs() {
                     <Icon className="h-6 w-6" aria-hidden="true" />
                   </span>
                   <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-stone">{p.phase}</p>
-                  <p className="mt-1 text-xl font-extrabold text-navy">{p.title}</p>
+                  <p className="mt-1 text-xl font-extrabold text-carbon">{p.title}</p>
                 </button>
               );
             })}
@@ -78,7 +78,7 @@ export default function Programs() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.28 }}
-              className="mt-6 rounded-[1.75rem] border border-navy/10 bg-white p-10 shadow-brand"
+              className="mt-6 rounded-[1.75rem] border border-carbon/10 bg-white p-10 shadow-brand"
             >
               <p className="max-w-3xl text-xl leading-relaxed text-ink">{phases[open].body}</p>
             </motion.div>
@@ -91,7 +91,7 @@ export default function Programs() {
             const Icon = ICONS[p.icon];
             const expanded = i === open;
             return (
-              <div key={p.phase} className="overflow-hidden rounded-[1.5rem] border-2 border-navy/10 bg-white">
+              <div key={p.phase} className="overflow-hidden rounded-[1.5rem] border-2 border-carbon/10 bg-white">
                 <h3>
                   <button
                     type="button"
@@ -112,7 +112,7 @@ export default function Programs() {
                       <span className="block text-xs font-bold uppercase tracking-[0.14em] text-stone">
                         {p.phase}
                       </span>
-                      <span className="block text-lg font-extrabold text-navy">{p.title}</span>
+                      <span className="block text-lg font-extrabold text-carbon">{p.title}</span>
                     </span>
                     <ChevronDown
                       aria-hidden="true"
