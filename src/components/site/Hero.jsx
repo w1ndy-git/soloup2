@@ -1,94 +1,154 @@
-import React, { useEffect, useState } from "react";
-import { Image } from "@/components/ui/image";
-import { LeafVein } from "@/components/site/Botanical";
-import { useMotion } from "@/components/site/MotionContext";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sprout, HandHeart, Briefcase } from 'lucide-react';
+import { org, links } from '@/lib/siteConfig';
 
-const HERO_IMG = "https://media.base44.com/images/public/6a98e133ceb86cb304e163c7/9e186c5c7_generated_b6b930d5.jpg";
+const badges = [
+  { icon: Sprout, label: 'Strength-based coaching' },
+  { icon: HandHeart, label: 'Real-world experience' },
+  { icon: Briefcase, label: 'Purposeful employment' },
+];
 
 export default function Hero() {
-  const { reduceMotion } = useMotion();
-  const [pulse, setPulse] = useState(12);
-
-  useEffect(() => {
-    // "Seeds planted today" — a gentle daily-varying metric
-    const day = new Date().getDate();
-    setPulse(8 + (day % 9));
-  }, []);
-
   return (
-    <section id="top" className="relative min-h-[100svh] flex items-center overflow-hidden">
-      {/* Cinematic background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0">
-          <Image
-            src={HERO_IMG}
-            alt="Queen Creek Botanical Gardens bathed in golden hour light"
-            className="w-full h-full"
-            fittingType="fill"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-forest-deep/70 via-forest/55 to-forest-deep/85" aria-hidden="true" />
-        <div className="absolute inset-0 backdrop-blur-[3px]" aria-hidden="true" />
+    <section id="top" className="relative overflow-hidden grad-hero text-white">
+      {/* Decorative growth arcs — echoes the arrow in the SoloUp mark. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.14]">
+        <svg className="h-full w-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="heroArc" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#dcebcf" stopOpacity="0" />
+              <stop offset="100%" stopColor="#dcebcf" />
+            </linearGradient>
+          </defs>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <path
+              key={i}
+              d={`M-40 ${640 + i * 30} Q ${420 + i * 70} ${360 - i * 55} ${1260} ${120 - i * 40}`}
+              fill="none"
+              stroke="url(#heroArc)"
+              strokeWidth={1.5}
+            />
+          ))}
+        </svg>
       </div>
 
-      {/* Decorative growth stems */}
-      <LeafVein className="absolute left-4 sm:left-10 top-1/2 -translate-y-1/2 w-16 sm:w-24 text-petal/30 animate-sway" />
-      <LeafVein className="absolute right-4 sm:right-10 top-1/3 w-12 sm:w-20 text-petal/20 animate-sway" />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 pt-32 pb-20 text-mist w-full">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mist/10 backdrop-blur border border-mist/20 text-mist/90 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em]">
-            <span className="w-2 h-2 rounded-full bg-petal animate-pulse-glow" />
-            A program of Cultivate Goodness
-          </span>
-
-          <h1 className="mt-7 font-display font-light text-hero text-mist text-balance">
-            <span className="block animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "120ms" }}>Skills.</span>
-            <span className="block animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "260ms" }}>
-              <span className="italic font-normal text-petal">Confidence.</span>
-            </span>
-            <span className="block animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "400ms" }}>Purpose.</span>
-          </h1>
-
-          <p className="mt-7 text-lg sm:text-xl text-mist/85 max-w-xl leading-relaxed animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "560ms" }}>
-            At Queen Creek Botanical Gardens, young adults with disabilities grow beyond the classroom
-            into meaningful adult lives — one seed, one skill, one purposeful step at a time.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4 animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "700ms" }}>
-            <a
-              href="#involved"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-petal text-forest font-bold text-base shadow-xl shadow-petal/30 hover:bg-petal-soft transition-colors min-h-[52px]"
+      <div className="container-brand relative py-20 sm:py-24 lg:py-32">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-semibold tracking-wide text-lime"
             >
-              Join the Movement
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </a>
-            <a
-              href="#path"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-mist/10 backdrop-blur border border-mist/30 text-mist font-semibold text-base hover:bg-mist/20 transition-colors min-h-[52px]"
+              {org.heroKicker}
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.06 }}
+              className="mt-6 font-display text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
             >
-              Explore the Path
-            </a>
+              Skills.{' '}
+              <span className="block sm:inline">
+                Confidence.{' '}
+                <span className="relative inline-block">
+                  Purpose.
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 300 18"
+                    className="absolute -bottom-2 left-0 w-full text-gold"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M4 12 C 80 4, 210 4, 296 10"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={7}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.14 }}
+              className="mt-8 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl"
+            >
+              {org.heroBody}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.22 }}
+              className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            >
+              <a
+                href="#involved"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-bold text-navy shadow-brand-lg transition-transform hover:-translate-y-0.5"
+              >
+                Join the Movement
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
+              <a
+                href="#about"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/35 px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-white/10"
+              >
+                Explore the Program
+              </a>
+            </motion.div>
+
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 flex flex-wrap gap-x-6 gap-y-3"
+            >
+              {badges.map(({ icon: Icon, label }) => (
+                <li key={label} className="inline-flex items-center gap-2 text-sm font-semibold text-lime">
+                  <Icon className="h-4.5 w-4.5 shrink-0" aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </motion.ul>
           </div>
 
-          {/* Impact Pulse */}
-          <div className="mt-10 inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-forest-deep/50 backdrop-blur border border-petal/30 animate-bloom" style={{ animationDelay: reduceMotion ? "0ms" : "860ms" }}>
-            <span className="relative grid place-items-center">
-              <span className="absolute w-3 h-3 rounded-full bg-petal animate-pulse-glow" />
-              <span className="w-3 h-3 rounded-full bg-petal" />
-            </span>
-            <span className="text-mist text-sm sm:text-base">
-              <span className="font-bold text-petal">{pulse} Seeds Planted Today</span>
-              <span className="text-mist/70"> — young adults in active training</span>
-            </span>
-          </div>
+          {/* Logo lockup card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.18 }}
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
+          >
+            <div className="rounded-[2rem] border border-white/15 bg-white/10 p-8 backdrop-blur-sm sm:p-10">
+              <img
+                src="/brand/soloup-logo.png"
+                width={480}
+                height={140}
+                alt=""
+                className="logo-invert w-full"
+              />
+              <p className="mt-8 border-t border-white/20 pt-6 text-center font-alt text-base leading-relaxed text-white/85">
+                Every participant starts somewhere. SoloUp makes sure that somewhere
+                leads onward — to work, to community, to a life they choose.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll cue */}
-      <a href="#about" aria-label="Scroll to learn more" className="absolute bottom-6 left-1/2 -translate-x-1/2 text-mist/70 hover:text-petal transition-colors">
-        <svg viewBox="0 0 24 24" className="w-7 h-7 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
-      </a>
+      {/* Wave into the cream page body */}
+      <div aria-hidden="true" className="relative -mb-px">
+        <svg viewBox="0 0 1440 90" className="block w-full text-cream" preserveAspectRatio="none">
+          <path fill="currentColor" d="M0 90 L0 46 C 240 96, 480 6, 720 26 C 960 46, 1200 86, 1440 40 L1440 90 Z" />
+        </svg>
+      </div>
     </section>
   );
 }
