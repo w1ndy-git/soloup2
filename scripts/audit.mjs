@@ -1,5 +1,11 @@
 /**
  * Interaction + accessibility audit.
+ *
+ * Dev-only tool; its deps are not installed by default so production builds
+ * stay fast. To run it:
+ *   npm i -D playwright jsqr && npx playwright install chromium
+ *   npm run build && node scripts/audit.mjs
+ *
  * Checks the things that decide whether this site is actually usable:
  * colour contrast, tap targets, keyboard paths, the mobile menu, the video
  * dialog, and text that overflows or overlaps.
@@ -188,6 +194,13 @@ const fail = [];
     for (const el of document.querySelectorAll('a, button, input, select')) {
       const r = el.getBoundingClientRect();
       if (r.width < 1 || r.height < 1) continue;
+      // WCAG 2.5.8 "Inline" exception: a link sitting inside a sentence is
+      // sized by the surrounding line-height and is not a failure.
+      const p = el.parentElement;
+      const inline =
+        p && ['P', 'SPAN', 'LI', 'BLOCKQUOTE'].includes(p.tagName) &&
+        (p.textContent || '').trim().length > (el.textContent || '').trim().length + 12;
+      if (inline) continue;
       if (r.height < 24 || r.width < 24) {
         small.push({ tag: el.tagName, text: (el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30), h: Math.round(r.height), w: Math.round(r.width) });
       }
