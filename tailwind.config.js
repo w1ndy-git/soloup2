@@ -12,6 +12,8 @@ module.exports = {
       },
       colors: {
         /* SoloUp brand — values from the organisation's own stylesheet */
+        carbon: 'rgb(var(--carbon) / <alpha-value>)',
+        carbonsoft: 'rgb(var(--carbonsoft) / <alpha-value>)',
         navy: 'rgb(var(--navy) / <alpha-value>)',
         deepsea: 'rgb(var(--deepsea) / <alpha-value>)',
         ocean: 'rgb(var(--ocean) / <alpha-value>)',
