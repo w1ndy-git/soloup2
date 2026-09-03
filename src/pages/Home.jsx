@@ -8,6 +8,7 @@ import Impact from '@/components/site/Impact';
 import GetInvolved from '@/components/site/GetInvolved';
 import ShareMovement from '@/components/site/ShareMovement';
 import Footer from '@/components/site/Footer';
+import AskSoloUp from '@/components/site/AskSoloUp';
 
 export default function Home() {
   return (
@@ -29,6 +30,9 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {/* Grounded site assistant. Floats above everything, on every screen. */}
+      <AskSoloUp />
     </div>
   );
 }
