@@ -1,133 +1,179 @@
-import React, { useEffect, useState } from "react";
-import { Sprout } from "@/components/site/Botanical";
-import { useMotion } from "@/components/site/MotionContext";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Menu, X, Heart } from 'lucide-react';
+import { navLinks, links, org } from '@/lib/siteConfig';
 
-const NAV = [
-  { label: "Our Path", href: "#path" },
-  { label: "Voices", href: "#voices" },
-  { label: "Grow the Movement", href: "#share" },
-  { label: "Impact", href: "#impact" },
-];
-
+/**
+ * Sticky site header.
+ *
+ * Fixes carried over from the audit of the current page:
+ *  - the six `href="##"` dead anchors are gone; every link resolves
+ *  - the logo now has a real alt text (it was alt="" twice)
+ *  - the mobile menu is a proper disclosure: labelled trigger, Escape to close,
+ *    scroll lock, focus returned to the trigger on close
+ *  - the QC Gardens retail nav (Food & Drink, EGIFT Cards, Farmers Market) is
+ *    dropped so the SoloUp ask is not competing with gift-shop links
+ */
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { reduceMotion, toggle } = useMotion();
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('');
+  const triggerRef = useRef(null);
+  const panelRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Sun-path backlight temperature based on time of day
-  const hour = new Date().getHours();
-  const sunTemp =
-    hour < 6 || hour >= 20 ? "from-forest-deep/90" :
-    hour < 11 ? "from-petal-soft/85" :
-    hour < 17 ? "from-terracotta-soft/80" :
-    "from-petal/85";
+  /* Highlight whichever section is currently in view. */
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href.slice(1));
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!sections.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(`#${visible.target.id}`);
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: [0, 0.25, 0.6] },
+    );
+    sections.forEach((s) => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    triggerRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') close();
+    };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    panelRef.current?.querySelector('a')?.focus();
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open, close]);
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-mist/85 backdrop-blur-xl shadow-[0_8px_40px_-20px_rgba(27,67,50,0.35)]" : "bg-transparent"
-      }`}
+      className={[
+        'sticky top-0 z-50 transition-all duration-300',
+        scrolled ? 'bg-cream/95 backdrop-blur-md shadow-brand' : 'bg-cream/80 backdrop-blur-sm',
+      ].join(' ')}
     >
-      <div className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${sunTemp} to-transparent opacity-30 transition-opacity duration-700`} aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex items-center justify-between h-20 py-4">
-          <a href="#top" className="flex items-center gap-2.5 group" aria-label="SoloUp home">
-            <span className="grid place-items-center w-11 h-11 rounded-full bg-forest text-petal shadow-lg shadow-forest/30 transition-transform group-hover:scale-105">
-              <Sprout className="w-6 h-6 text-petal" />
-            </span>
-            <span className="leading-none">
-              <span className="block font-display font-semibold text-xl text-forest tracking-tight">SoloUp</span>
-              <span className="block text-[10px] uppercase tracking-[0.18em] text-forest/60 font-semibold">Seeds of Limitless Opportunities</span>
-            </span>
+      <div className="container-brand">
+        <div className="flex h-20 items-center justify-between gap-4">
+          <a href="#top" className="flex shrink-0 items-center" aria-label={`${org.name} — home`}>
+            <img
+              src="/brand/soloup-logo.png"
+              width={480}
+              height={140}
+              alt={`${org.name} — ${org.tagline}`}
+              className="h-9 w-auto sm:h-11"
+            />
           </a>
 
-          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
-            {NAV.map((item) => (
+          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+            {navLinks.map((l) => (
               <a
-                key={item.href}
-                href={item.href}
-                className="relative px-4 py-2.5 rounded-full text-sm font-semibold text-forest/80 hover:text-forest hover:bg-forest/5 transition-colors min-h-[44px] flex items-center"
+                key={l.href}
+                href={l.href}
+                aria-current={active === l.href ? 'true' : undefined}
+                className={[
+                  'rounded-full px-4 py-2 text-[0.95rem] font-semibold transition-colors',
+                  active === l.href ? 'bg-sky text-navy' : 'text-stone hover:bg-sky/70 hover:text-navy',
+                ].join(' ')}
               >
-                {item.label}
+                {l.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggle}
-              aria-pressed={reduceMotion}
-              aria-label={reduceMotion ? "Turn off reduced motion" : "Reduce motion"}
-              title={reduceMotion ? "Motion reduced" : "Reduce motion"}
-              className={`grid place-items-center w-11 h-11 rounded-full border-2 transition-colors min-w-[44px] ${
-                reduceMotion
-                  ? "bg-petal border-petal text-forest"
-                  : "bg-transparent border-forest/20 text-forest/70 hover:border-forest/40"
-              }`}
-            >
-              {reduceMotion ? (
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                  <path d="M4 4l16 16M9 9a3 3 0 004 4" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
-                  <circle cx="12" cy="12" r="3.5" />
-                </svg>
-              )}
-            </button>
-
+          <div className="hidden items-center gap-3 lg:flex">
             <a
-              href="#involved"
-              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-forest text-mist font-semibold text-sm shadow-lg shadow-forest/25 hover:bg-forest-deep transition-colors min-h-[44px]"
+              href={links.interestForm}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border-2 border-navy/15 px-5 py-2.5 text-[0.95rem] font-bold text-navy transition-colors hover:border-navy/40 hover:bg-sky"
             >
-              Plant a Seed
+              Get started
             </a>
-
-            <button
-              onClick={() => setOpen((o) => !o)}
-              aria-label="Open menu"
-              aria-expanded={open}
-              className="md:hidden grid place-items-center w-11 h-11 rounded-full border-2 border-forest/20 text-forest min-w-[44px]"
+            <a
+              href={links.donate}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-[0.95rem] font-bold text-white shadow-brand transition-transform hover:-translate-y-0.5 hover:bg-deepsea"
             >
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-              </svg>
-            </button>
+              <Heart className="h-4 w-4" aria-hidden="true" />
+              Donate
+            </a>
           </div>
-        </div>
 
-        {/* Mobile menu */}
-        {open && (
-          <div className="md:hidden pb-5">
-            <nav className="flex flex-col gap-1 bg-mist/95 backdrop-blur rounded-3xl p-3 shadow-xl border border-forest/10" aria-label="Mobile">
-              {NAV.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="px-4 py-3 rounded-2xl text-base font-semibold text-forest/80 hover:bg-forest/5 min-h-[44px] flex items-center"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href="#involved"
-                onClick={() => setOpen(false)}
-                className="mt-1 px-4 py-3 rounded-2xl bg-forest text-mist font-semibold text-center min-h-[44px] flex items-center justify-center"
-              >
-                Plant a Seed
-              </a>
-            </nav>
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-navy/15 text-navy transition-colors hover:bg-sky lg:hidden"
+          >
+            {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile panel */}
+      <div
+        id="mobile-nav"
+        ref={panelRef}
+        hidden={!open}
+        className="border-t border-navy/10 bg-cream lg:hidden"
+      >
+        <nav aria-label="Primary (mobile)" className="container-brand flex flex-col gap-1 py-4">
+          {navLinks.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={close}
+              className="rounded-2xl px-4 py-3.5 text-lg font-semibold text-navy transition-colors hover:bg-sky"
+            >
+              {l.label}
+            </a>
+          ))}
+          <div className="mt-2 grid gap-2">
+            <a
+              href={links.interestForm}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+              className="rounded-2xl border-2 border-navy/15 px-4 py-3.5 text-center text-lg font-bold text-navy"
+            >
+              Get started
+            </a>
+            <a
+              href={links.donate}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-navy px-4 py-3.5 text-center text-lg font-bold text-white"
+            >
+              <Heart className="h-5 w-5" aria-hidden="true" />
+              Donate
+            </a>
           </div>
-        )}
+        </nav>
       </div>
     </header>
   );
