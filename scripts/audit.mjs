@@ -45,7 +45,11 @@ const CONTRAST = `
         if (solid.length) return solid;
       }
       const bg = cs.backgroundColor;
-      if (bg && !/rgba\\(0, 0, 0, 0\\)|transparent/.test(bg)) return [bg];
+      // Skip fully- and mostly-transparent layers: a 10% white pill over a navy
+      // gradient is still effectively navy, not white.
+      const am = bg && bg.match(/rgba\\([^)]*,\\s*([\\d.]+)\\)$/);
+      const alpha = am ? Number(am[1]) : 1;
+      if (bg && !/transparent/.test(bg) && alpha >= 0.6) return [bg];
       n = n.parentElement;
     }
     return ['rgb(255,255,255)'];
@@ -123,7 +127,9 @@ const fail = [];
   /* video dialog */
   await page.evaluate(() => document.getElementById('stories')?.scrollIntoView());
   await page.waitForTimeout(900);
-  const playBtn = await page.$('#stories button:has-text("Watch the story")');
+  const playBtn =
+    (await page.$('#stories button:has-text("Watch the story")')) ||
+    (await page.$('#stories button:has-text("What belongs here")'));
   if (playBtn) {
     await playBtn.click();
     await page.waitForTimeout(700);
