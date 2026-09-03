@@ -1,62 +1,116 @@
-import React from "react";
-import { Image } from "@/components/ui/image";
-import { SunArc } from "@/components/site/Botanical";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Compass, Wrench, Sprout, ArrowRight } from 'lucide-react';
+import { pillars, journey } from '@/lib/siteConfig';
 
-const ABOUT_IMG = "https://media.base44.com/images/public/6a98e133ceb86cb304e163c7/d82343a31_generated_5cb11931.jpg";
+const ICONS = { Compass, Wrench, Sprout };
 
+/* Emoji on the current page (🧭 🛠️ 🌿) are announced literally by screen
+   readers. Replaced with labelled SVG icons. */
 export default function About() {
+  const [step, setStep] = useState(0);
+
   return (
-    <section id="about" className="relative bg-mist py-24 sm:py-32 overflow-hidden">
-      <SunArc className="absolute top-10 left-1/2 -translate-x-1/2 w-64 text-petal/40" />
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1">
-            <div className="relative max-w-md mx-auto lg:mx-0">
-              <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-petal/30 to-terracotta/20 blur-2xl" aria-hidden="true" />
-              <div className="relative mask-pebble overflow-hidden rounded-[2.5rem] shadow-2xl shadow-forest/20">
-                <Image
-                  src={ABOUT_IMG}
-                  alt="A serene garden pathway at Queen Creek Botanical Gardens"
-                  className="w-full aspect-[3/2] object-cover"
-                  fittingType="fill"
-                />
-              </div>
-              <div className="absolute -bottom-5 -right-2 sm:-right-5 bg-forest text-mist rounded-2xl px-5 py-4 shadow-xl">
-                <p className="font-display text-3xl font-semibold leading-none text-petal">100%</p>
-                <p className="text-xs mt-1 text-mist/80 max-w-[7rem]">person-centered growth</p>
-              </div>
-            </div>
-          </div>
+    <section id="about" className="scroll-mt-24 bg-cream py-20 sm:py-28">
+      <div className="container-brand">
+        {/* ── The SoloUp Journey ───────────────────────────────────────── */}
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf">The SoloUp Journey</p>
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+            From potential to purpose.
+          </h2>
+        </div>
 
-          <div className="order-1 lg:order-2">
-            <span className="text-petal font-semibold uppercase tracking-[0.2em] text-xs">Our Story</span>
-            <h2 className="mt-3 font-display font-light text-display text-forest text-balance">
-              Where potential is <span className="italic text-terracotta">cultivated</span>, not contained.
-            </h2>
-            <p className="mt-6 text-lg text-forest/75 leading-relaxed">
-              SoloUp is a program of <strong className="text-forest">Cultivate Goodness</strong> at Queen Creek
-              Botanical Gardens. We believe the transition from classroom to adult life should feel like a
-              majestic unfolding — not a cliff edge.
-            </p>
-            <p className="mt-4 text-lg text-forest/75 leading-relaxed">
-              Through hands-on horticulture, life skills, and community connection, young adults with
-              disabilities discover their own rhythm of growth. Here, every seed planted is a step toward
-              confidence, capability, and a life of purpose.
-            </p>
+        <div className="mt-14">
+          {/* Progress rail */}
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="SoloUp growth pathway">
+            {journey.map((s, i) => {
+              const isActive = i === step;
+              return (
+                <li key={s.n}>
+                  <button
+                    type="button"
+                    onClick={() => setStep(i)}
+                    aria-current={isActive ? 'step' : undefined}
+                    className={[
+                      'group h-full w-full rounded-[1.5rem] border-2 p-6 text-left transition-all duration-300',
+                      isActive
+                        ? 'border-leaf bg-white shadow-brand'
+                        : 'border-navy/10 bg-white/60 hover:border-leaf/40 hover:bg-white',
+                    ].join(' ')}
+                  >
+                    <span
+                      className={[
+                        'inline-flex h-11 w-11 items-center justify-center rounded-full text-lg font-black transition-colors',
+                        isActive ? 'bg-leaf text-white' : 'bg-lime text-navy group-hover:bg-leaf/25',
+                      ].join(' ')}
+                      aria-hidden="true"
+                    >
+                      {s.n}
+                    </span>
+                    <h3 className="mt-4 text-lg font-extrabold text-navy">
+                      <span className="sr-only">Step {s.n}: </span>
+                      {s.title}
+                    </h3>
+                    <p className="mt-1.5 text-[0.95rem] leading-relaxed text-stone">{s.body}</p>
+                    <span
+                      aria-hidden="true"
+                      className={[
+                        'mt-4 block h-1.5 rounded-full transition-all duration-500',
+                        isActive ? 'bg-leaf' : 'bg-navy/10',
+                      ].join(' ')}
+                    />
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
 
-            <div className="mt-8 grid sm:grid-cols-3 gap-4">
-              {[
-                { k: "Belong", v: "A community that roots for you" },
-                { k: "Become", v: "Skills that bloom into mastery" },
-                { k: "Believe", v: "Purpose that lasts a lifetime" },
-              ].map((b) => (
-                <div key={b.k} className="rounded-2xl bg-white/70 border border-forest/10 p-4">
-                  <p className="font-display text-lg font-semibold text-forest">{b.k}</p>
-                  <p className="text-sm text-forest/65 mt-1">{b.v}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[0.95rem] font-semibold text-stone">
+            <span className="inline-flex items-center gap-2">
+              <Sprout className="h-4.5 w-4.5 text-leaf" aria-hidden="true" />
+              Grow at your pace
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <ArrowRight className="h-4.5 w-4.5 text-ocean" aria-hidden="true" />
+              Supported every step
+            </span>
           </div>
+        </div>
+
+        {/* ── Why SoloUp ───────────────────────────────────────────────── */}
+        <div className="mx-auto mt-24 max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-ocean">Why SoloUp</p>
+          <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-navy sm:text-5xl">
+            Adulthood should open doors, not close them.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-stone">
+            Too many young adults lose access to structured support after school and struggle to
+            find a clear path toward work, independence, and community. SoloUp bridges that gap with
+            practical experiences designed around each participant’s strengths.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {pillars.map((p, i) => {
+            const Icon = ICONS[p.icon];
+            return (
+              <motion.article
+                key={p.title}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group rounded-[1.75rem] border border-navy/10 bg-white p-8 shadow-brand transition-transform duration-300 hover:-translate-y-1"
+              >
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl grad-lime text-leaf">
+                  <Icon className="h-7 w-7" aria-hidden="true" />
+                </span>
+                <h3 className="mt-6 text-xl font-extrabold text-navy">{p.title}</h3>
+                <p className="mt-3 leading-relaxed text-stone">{p.body}</p>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
