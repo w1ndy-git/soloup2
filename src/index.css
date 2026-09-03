@@ -20,7 +20,15 @@
     --deepsea: 33 79 112;
     --ocean: 47 111 159;
     --sky: 234 245 251;
-    --leaf: 95 143 78;
+    /*
+      ACCESSIBILITY: the brand green #5f8f4e carries only 3.8:1 against white,
+      which fails WCAG AA for body text and for white text sitting on it. The
+      text/gradient green is darkened to #3f6b33 (6.2:1 on white, 5.0:1 under
+      lime, 6.0:1 on cream). The original brand green is kept as --leafbright
+      for decorative fills and rules, where contrast rules do not apply.
+    */
+    --leaf: 63 107 51;
+    --leafbright: 95 143 78;
     --lime: 220 235 207;
     --palegreen: 247 251 243;
     --gold: 242 184 75;
