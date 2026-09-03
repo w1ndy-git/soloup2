@@ -47,7 +47,13 @@ export default function GetInvolved() {
                     <Icon className="h-7 w-7" aria-hidden="true" />
                   </span>
                   <h3 className="mt-6 text-xl font-extrabold text-carbon">{a.title}</h3>
-                  <p className="mt-3 flex-1 leading-relaxed text-stone">{a.body}</p>
+                  <p className="mt-3 leading-relaxed text-stone">{a.body}</p>
+                  {a.note && (
+                    <p className="mt-3 rounded-xl bg-lime px-4 py-3 text-[0.9rem] font-semibold leading-relaxed text-ink">
+                      {a.note}
+                    </p>
+                  )}
+                  <span className="flex-1" aria-hidden="true" />
                   <a
                     href={a.href}
                     {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
