@@ -1,55 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lato:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  SoloUp brand tokens.
+  Values lifted verbatim from the live soloup.org / qcgardens.org stylesheet
+  so the rebuild is colour-identical to the organisation's existing identity.
+    --navy #15324a   --blue #2f6f9f   --sky  #eaf5fb   --green #5f8f4e
+    --lime #dcebcf   --gold #f2b84b   --cream #fbfaf4  --ink   #21303b
+    --muted #61707b  (deep accent #214f70, pale green #f7fbf3)
+*/
+
 @layer base {
   :root {
-    --background: 248 249 241;
-    --foreground: 27 67 50;
-    --card: 255 255 255;
-    --card-foreground: 27 67 50;
-    --popover: 255 255 255;
-    --popover-foreground: 27 67 50;
-    --primary: 27 67 50;
-    --primary-foreground: 248 249 241;
-    --secondary: 226 149 120;
-    --secondary-foreground: 27 67 50;
-    --muted: 233 236 224;
-    --muted-foreground: 86 110 94;
-    --accent: 255 209 102;
-    --accent-foreground: 27 67 50;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 220 200;
-    --input: 210 220 200;
-    --ring: 255 209 102;
-    --radius: 1.25rem;
-    --font-heading: 'Fraunces', ui-serif, Georgia, serif;
-    --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Fraunces', ui-serif, Georgia, serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
+    /* Brand ramp, space-separated RGB for tailwind's rgb(var(--x)) pattern */
+    --navy: 21 50 74;
+    --deepsea: 33 79 112;
+    --ocean: 47 111 159;
+    --sky: 234 245 251;
+    --leaf: 95 143 78;
+    --lime: 220 235 207;
+    --palegreen: 247 251 243;
+    --gold: 242 184 75;
+    --cream: 251 250 244;
+    --ink: 33 48 59;
+    --stone: 97 112 123;
 
-  .dark {
-    --background: 27 67 50;
-    --foreground: 248 249 241;
-    --card: 31 77 58;
-    --card-foreground: 248 249 241;
-    --popover: 31 77 58;
-    --popover-foreground: 248 249 241;
-    --primary: 255 209 102;
-    --primary-foreground: 27 67 50;
-    --secondary: 226 149 120;
-    --secondary-foreground: 248 249 241;
-    --muted: 31 77 58;
-    --muted-foreground: 200 215 205;
-    --accent: 255 209 102;
-    --accent-foreground: 27 67 50;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 60 100 80;
-    --input: 60 100 80;
-    --ring: 255 209 102;
+    /* shadcn/ui tokens mapped onto the brand so every primitive inherits it */
+    --background: 251 250 244;
+    --foreground: 33 48 59;
+    --card: 255 255 255;
+    --card-foreground: 33 48 59;
+    --popover: 255 255 255;
+    --popover-foreground: 33 48 59;
+    --primary: 21 50 74;
+    --primary-foreground: 255 255 255;
+    --secondary: 234 245 251;
+    --secondary-foreground: 21 50 74;
+    --muted: 234 245 251;
+    --muted-foreground: 97 112 123;
+    --accent: 220 235 207;
+    --accent-foreground: 21 50 74;
+    --destructive: 190 49 49;
+    --destructive-foreground: 255 255 255;
+    --border: 222 231 238;
+    --input: 222 231 238;
+    --ring: 47 111 159;
+
+    --radius: 1.375rem; /* their --radius: 22px */
+    --shadow-brand: 0 16px 40px rgb(21 50 74 / 0.12);
+
+    --font-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-alt: 'Lato', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 }
 
@@ -60,132 +67,83 @@
 
   html {
     scroll-behavior: smooth;
+    /* offset for the sticky header when jumping to an anchor */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    line-height: 1.6;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Accessible focus halo in Sun-Drenched Petal */
-  :focus-visible {
-    outline: 3px solid hsl(45 100% 66%);
+  /*
+    Accessibility: a visible, high-contrast focus ring on every interactive
+    element. The previous site relied on the browser default, which the theme
+    suppressed in places.
+  */
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 3px solid rgb(var(--ocean));
     outline-offset: 3px;
     border-radius: 6px;
   }
 
-  /* Selection */
-  ::selection {
-    background: hsl(45 100% 66%);
-    color: hsl(155 42% 18%);
+  /* Respect the OS "reduce motion" setting — important for this audience. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
 @layer components {
-  .font-display {
-    font-family: var(--font-display);
+  .container-brand {
+    width: 100%;
+    max-width: 1160px; /* their --max */
+    margin-inline: auto;
+    padding-inline: 1.25rem;
   }
 
-  .text-balance {
-    text-wrap: balance;
+  @media (min-width: 768px) {
+    .container-brand { padding-inline: 2rem; }
   }
 
-  /* Organic pebble mask for images */
-  .mask-pebble {
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 4c30 0 56 10 74 28 18 18 22 44 18 70-4 26-16 50-38 66-22 16-52 28-82 26-30-2-58-18-66-46-8-28 2-62 18-86C40 38 70 4 100 4z'/></svg>");
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 4c30 0 56 10 74 28 18 18 22 44 18 70-4 26-16 50-38 66-22 16-52 28-82 26-30-2-58-18-66-46-8-28 2-62 18-86C40 38 70 4 100 4z'/></svg>");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
+  .shadow-brand { box-shadow: var(--shadow-brand); }
+
+  .grad-hero {
+    background-image: linear-gradient(150deg, rgb(var(--navy)), rgb(var(--deepsea)) 55%, rgb(var(--leaf)));
+  }
+  .grad-ocean {
+    background-image: linear-gradient(135deg, rgb(var(--ocean)), rgb(var(--leaf)));
+  }
+  .grad-deep {
+    background-image: linear-gradient(135deg, rgb(var(--ocean)), rgb(var(--navy)));
+  }
+  .grad-lime {
+    background-image: linear-gradient(145deg, rgb(var(--lime)), rgb(var(--palegreen)));
+  }
+  .grad-page {
+    background-image: linear-gradient(145deg, rgb(248 252 255) 0%, rgb(237 247 242) 52%, rgb(251 250 244) 100%);
   }
 
-  .mask-leaf {
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 6c44 0 94 30 94 86 0 44-34 78-74 88-22 6-50 6-72-6-22-12-38-38-38-66 0-56 46-102 90-102z'/></svg>");
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 6c44 0 94 30 94 86 0 44-34 78-74 88-22 6-50 6-72-6-22-12-38-38-38-66 0-56 46-102 90-102z'/></svg>");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
+  /* Skip link — hidden until focused by a keyboard user. */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background: rgb(var(--navy));
+    color: #fff;
+    font-weight: 700;
+    transition: top 0.18s ease;
   }
-}
+  .skip-link:focus { top: 0; }
 
-/* Reduce motion: when active, disable animations & smooth scroll */
-.reduce-motion,
-.reduce-motion * {
-  scroll-behavior: auto !important;
-  animation-duration: 0.001ms !important;
-  animation-delay: 0ms !important;
-  transition-duration: 0.001ms !important;
-  transition-delay: 0ms !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
-/* Bloom animation for hero headline */
-@keyframes bloom {
-  0% {
-    opacity: 0;
-    transform: scale(0.92) translateY(12px);
-    filter: blur(8px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0);
-  }
-}
-
-.animate-bloom {
-  animation: bloom 1s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes float-sway {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-14px) rotate(2deg); }
-}
-
-.animate-sway {
-  animation: float-sway 9s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 hsl(45 100% 66% / 0.55); }
-  50% { box-shadow: 0 0 0 14px hsl(45 100% 66% / 0); }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2.6s ease-in-out infinite;
-}
-
-@keyframes grow-stem {
-  0% { transform: scaleY(0); transform-origin: top; }
-  100% { transform: scaleY(1); transform-origin: top; }
-}
-
-.animate-grow-stem {
-  animation: grow-stem 1.4s ease-out both;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(155 42% 18%);
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(45 100% 66%);
-  border-radius: 999px;
+  /* The SoloUp mark is a single navy PNG; invert it for dark surfaces. */
+  .logo-invert { filter: brightness(0) invert(1); }
 }
