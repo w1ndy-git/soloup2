@@ -9,6 +9,28 @@ match the organisation's existing identity rather than being reinvented.
 
 ---
 
+## Do this first: publish the app
+
+**The Ask SoloUp assistant cannot work until you hit Publish in the Base44
+editor.** Until then every API call returns 403 `not_deployed`, and the
+assistant shows "The assistant goes live once this app is published" with a
+link to the interest form. The same applies to the Testimonial and
+PartnerInquiry entities — the testimonial gallery falls back to its placeholder
+cards while unpublished, which is why it still looks correct in preview.
+
+Once published, verify the assistant with:
+
+```bash
+npm i -D playwright jsqr && npx playwright install chromium
+npm run build && node scripts/agentcheck.mjs
+```
+
+That script asks it nine questions, including four it must refuse (eligibility,
+cost, contact details, start dates) and a prompt-injection attempt. See
+"Verification" below.
+
+---
+
 ## Things you need to fill in
 
 These are the only places where real information is missing. Nothing has been
@@ -55,7 +77,31 @@ four placeholders disappear on their own.
 
 Captions are switched on by default for YouTube embeds (`cc_load_policy=1`).
 
-### 3. Employer enquiries — `PartnerInquiry` entity
+### 3. The interest form asks nothing about the programme
+
+The form at the "Join the interest list" link is NeonCRM's stock **Account
+Registration**: name, email, phone, address, a marketing-consent checkbox and an
+optional login. It asks nothing about the young adult, and cannot tell a family
+from an employer from a volunteer — the exact distinction the Get Involved
+section draws. Its consent line also opts people into the Queen Creek Botanical
+Gardens list rather than SoloUp's.
+
+Worth adding programme questions to that form, or creating a SoloUp-specific
+one. Until then the assistant tells people the form does not ask programme
+questions, so specifics should go to staff.
+
+### 4. Donations do not reach SoloUp unless the donor changes a dropdown
+
+The donation form has a **Campaign Fund** selector with a **"SoloUp Program"**
+option that is **not the default**. Someone who arrives from the SoloUp page,
+clicks Donate and fills the form in without touching that dropdown funds
+Cultivate Goodness generally.
+
+The rebuild now says this on the Supporters card, and the assistant volunteers
+it whenever anyone asks about giving. The better long-term fix is a donation
+link that pre-selects the fund, if NeonCRM supports it.
+
+### 5. Employer enquiries — `PartnerInquiry` entity
 
 On the live site the **"For Employers"** button points at the *families*
 interest form, so employers were being asked about their young adult. That CTA
