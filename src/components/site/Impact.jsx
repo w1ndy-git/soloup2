@@ -1,70 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useMotion } from "@/components/site/MotionContext";
-
-const STATS = [
-  { value: 48, suffix: "+", label: "Young adults growing with us" },
-  { value: 92, suffix: "%", label: "Gain a community role within a year" },
-  { value: 1200, suffix: "+", label: "Seedlings planted & harvested" },
-  { value: 15, suffix: "", label: "Community partners standing with us" },
-];
-
-function CountUp({ end, suffix, reduceMotion }) {
-  const [n, setN] = useState(reduceMotion ? end : 0);
-  const ref = useRef(null);
-  const done = useRef(false);
-
-  useEffect(() => {
-    if (reduceMotion) { setN(end); return; }
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !done.current) {
-          done.current = true;
-          const duration = 1600;
-          const start = performance.now();
-          const tick = (now) => {
-            const p = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setN(Math.round(end * eased));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.4 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [end, reduceMotion]);
-
-  const display = n >= 1000 ? `${(n / 1000).toFixed(n >= 1200 ? 0 : 1)}k` : n;
-  return <span ref={ref}>{display}{suffix}</span>;
-}
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Quote } from 'lucide-react';
+import { impact } from '@/lib/siteConfig';
 
 export default function Impact() {
-  const { reduceMotion } = useMotion();
   return (
-    <section id="impact" className="relative bg-mist py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-terracotta font-semibold uppercase tracking-[0.2em] text-xs">Our Impact</span>
-          <h2 className="mt-3 font-display font-light text-display text-forest text-balance">
-            Growth you can <span className="italic text-terracotta">measure</span>.
-          </h2>
-          <p className="mt-5 text-lg text-forest/70">
-            Every number here is a young adult stepping into a life of confidence and purpose.
-          </p>
-        </div>
-        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {STATS.map((s) => (
-            <div key={s.label} className="rounded-[2rem] bg-white border border-forest/10 p-7 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500">
-              <p className="font-display text-4xl sm:text-5xl font-semibold text-forest">
-                <CountUp end={s.value} suffix={s.suffix} reduceMotion={reduceMotion} />
-              </p>
-              <p className="mt-3 text-forest/65 text-sm sm:text-base leading-snug">{s.label}</p>
-            </div>
-          ))}
+    <section id="impact" className="scroll-mt-24 grad-hero py-20 text-white sm:py-28">
+      <div className="container-brand">
+        <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-lime">The Impact</p>
+            <h2 className="mt-3 font-display text-4xl font-black leading-tight tracking-tight sm:text-5xl">
+              {impact.heading}
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/85">{impact.body}</p>
+
+            <figure className="mt-10 rounded-[1.75rem] border border-white/20 bg-white/10 p-8 backdrop-blur-sm">
+              <Quote className="h-8 w-8 text-gold" aria-hidden="true" />
+              <blockquote className="mt-4 text-xl font-medium leading-relaxed text-white">
+                {impact.pullQuote}
+              </blockquote>
+              <figcaption className="mt-4 text-sm font-semibold text-lime">
+                — The SoloUp program promise
+              </figcaption>
+            </figure>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {impact.markers.map((m, i) => (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="rounded-[1.5rem] border border-white/20 bg-white/10 p-7 backdrop-blur-sm"
+              >
+                <p className="font-display text-4xl font-black leading-none text-gold sm:text-5xl">
+                  {m.label}
+                </p>
+                <p className="mt-3 leading-relaxed text-white/85">{m.body}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
