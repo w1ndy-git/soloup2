@@ -28,6 +28,8 @@ const SAMPLE_STORIES = [
     category: 'participant',
     quote:
       'A participant describes what changed for them — the first shift they worked, the routine they built, the thing they can now do alone.',
+    transcript:
+      'PLACEHOLDER — no real person is quoted here. This slot is for a 60–90 second clip of a participant in their own words: what they were doing before SoloUp, one concrete thing they can do now, and what they are working toward next. Record it where they actually work. Add the video URL and a full transcript to this record in the Base44 dashboard.',
     is_sample: true,
     published: true,
     sort_order: 1,
@@ -39,6 +41,8 @@ const SAMPLE_STORIES = [
     category: 'family',
     quote:
       'A parent talks about the drop-off after graduation — and what it meant to find a program that kept going when school stopped.',
+    transcript:
+      'PLACEHOLDER — no real person is quoted here. This slot is for a parent or guardian describing the gap that opens when school support ends, and what changed once their young adult joined SoloUp. Parents speaking to other parents is the strongest recruitment this page can carry.',
     is_sample: true,
     published: true,
     sort_order: 2,
@@ -50,6 +54,8 @@ const SAMPLE_STORIES = [
     category: 'employer',
     quote:
       'A local employer explains how a supported job trial worked in practice, and what their team gained from it.',
+    transcript:
+      'PLACEHOLDER — no real business is quoted here. This slot is for a partner employer answering the question every other employer is silently asking: what did this actually cost me, and was it worth it. Name the business only with written permission.',
     is_sample: true,
     published: true,
     sort_order: 3,
@@ -61,6 +67,8 @@ const SAMPLE_STORIES = [
     category: 'volunteer',
     quote:
       'A volunteer or coach describes a moment in the garden when something clicked for the person they were working alongside.',
+    transcript:
+      'PLACEHOLDER — no real person is quoted here. This slot is for a volunteer or job coach describing one specific moment, not a general endorsement. Specifics persuade; adjectives do not.',
     is_sample: true,
     published: true,
     sort_order: 4,
@@ -209,7 +217,9 @@ export default function Testimonials() {
                         <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-brand-lg">
                           <Play className="ml-1 h-7 w-7 text-navy" aria-hidden="true" fill="currentColor" />
                         </span>
-                        <span className="sr-only">Play the story from {s.name}</span>
+                        <span className="sr-only">
+                          {s.is_sample ? `Open the ${s.name} placeholder` : `Play the story from ${s.name}`}
+                        </span>
                       </button>
                     )}
                   </div>
@@ -226,9 +236,9 @@ export default function Testimonials() {
                       <button
                         type="button"
                         onClick={() => setOpenItem(s)}
-                        className="mt-5 inline-flex items-center gap-2 self-start text-[0.95rem] font-bold text-ocean hover:text-navy"
+                        className="mt-5 inline-flex items-center gap-2 self-start py-1 text-[0.95rem] font-bold text-ocean hover:text-navy"
                       >
-                        Watch the story
+                        {s.is_sample ? 'What belongs here' : 'Watch the story'}
                         <ArrowRight className="h-4 w-4" aria-hidden="true" />
                       </button>
                     )}
