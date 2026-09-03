@@ -64,7 +64,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="text-white/75 transition-colors hover:text-white">
+                  <a href={l.href} className="inline-block py-1 text-white/75 transition-colors hover:text-white">
                     {l.label}
                   </a>
                 </li>
@@ -80,7 +80,7 @@ export default function Footer() {
                   href={links.donate}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-1.5 py-1 text-white/75 transition-colors hover:text-white"
                 >
                   Donate <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
@@ -90,13 +90,13 @@ export default function Footer() {
                   href={links.interestForm}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-1.5 py-1 text-white/75 transition-colors hover:text-white"
                 >
                   Interest list <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               </li>
               <li>
-                <a href="#partner" className="text-white/75 transition-colors hover:text-white">
+                <a href="#partner" className="inline-block py-1 text-white/75 transition-colors hover:text-white">
                   Employer partnership
                 </a>
               </li>
@@ -105,7 +105,7 @@ export default function Footer() {
                   href={links.volunteer}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-1.5 py-1 text-white/75 transition-colors hover:text-white"
                 >
                   Volunteer <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
@@ -115,7 +115,7 @@ export default function Footer() {
                   href={links.cultivateGoodness}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                  className="inline-flex items-center gap-1.5 py-1 text-white/75 transition-colors hover:text-white"
                 >
                   Cultivate Goodness <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
