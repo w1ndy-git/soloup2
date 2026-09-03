@@ -1,77 +1,180 @@
-import React from "react";
-import { Sprout } from "@/components/site/Botanical";
+import React from 'react';
+import { Instagram, Facebook, Mail, Phone, MapPin, ExternalLink, Heart } from 'lucide-react';
+import { org, links, contact, navLinks } from '@/lib/siteConfig';
 
+/**
+ * Footer.
+ *
+ * Fixes from the audit:
+ *  - the old page closed with "Copyright 2026 © Queen Creek Botanical Gardens"
+ *    on a SoloUp/Cultivate Goodness page. Attribution is now explicit about the
+ *    programme-within-an-organisation relationship.
+ *  - social links now exist (the previous page had none anywhere)
+ *  - contact rows render only when a real value is set in siteConfig, so the
+ *    footer never shows an invented email or phone number.
+ */
 export default function Footer() {
+  const year = new Date().getFullYear();
+  const hasContact = contact.email || contact.phone || contact.addressLines;
+
   return (
-    <footer className="relative bg-forest-deep text-mist pt-20 pb-10 overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-petal/40 to-transparent" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="grid place-items-center w-11 h-11 rounded-full bg-petal text-forest">
-                <Sprout className="w-6 h-6" />
-              </span>
-              <span className="font-display font-semibold text-2xl">SoloUp</span>
-            </div>
-            <p className="mt-5 text-mist/70 max-w-sm leading-relaxed">
-              A program of Cultivate Goodness at Queen Creek Botanical Gardens — helping young adults with
-              disabilities grow beyond the classroom into meaningful adult lives.
-            </p>
-            <p className="mt-4 font-display italic text-petal text-lg">Seeds of Limitless Opportunities</p>
+    <footer className="bg-navy text-white">
+      <div className="container-brand py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <img
+              src="/brand/soloup-logo.png"
+              width={480}
+              height={140}
+              alt={`${org.name} — ${org.tagline}`}
+              className="logo-invert h-12 w-auto"
+            />
+            <p className="mt-6 max-w-md leading-relaxed text-white/75">{org.footerBlurb}</p>
+
+            <ul className="mt-7 flex gap-3">
+              <li>
+                <a
+                  href={links.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 transition-colors hover:bg-white/10"
+                >
+                  <Instagram className="h-5 w-5" aria-hidden="true" />
+                  <span className="sr-only">SoloUp on Instagram (opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={links.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 transition-colors hover:bg-white/10"
+                >
+                  <Facebook className="h-5 w-5" aria-hidden="true" />
+                  <span className="sr-only">SoloUp on Facebook (opens in a new tab)</span>
+                </a>
+              </li>
+            </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-petal uppercase tracking-[0.15em] text-xs">Explore</h3>
-            <ul className="mt-4 space-y-3">
-              {[
-                { l: "Our Path", h: "#path" },
-                { l: "Voices", h: "#voices" },
-                { l: "Grow the Movement", h: "#share" },
-                { l: "Impact", h: "#impact" },
-                { l: "Plant a Seed", h: "#involved" },
-              ].map((i) => (
-                <li key={i.h}>
-                  <a href={i.h} className="text-mist/75 hover:text-petal transition-colors min-h-[44px] inline-flex items-center">{i.l}</a>
+          <nav aria-labelledby="footer-explore">
+            <h2 id="footer-explore" className="text-sm font-bold uppercase tracking-[0.16em] text-lime">
+              Explore
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="text-white/75 transition-colors hover:text-white">
+                    {l.label}
+                  </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           <div>
-            <h3 className="font-semibold text-petal uppercase tracking-[0.15em] text-xs">Visit & Connect</h3>
-            <ul className="mt-4 space-y-3 text-mist/75">
-              <li>Queen Creek Botanical Gardens</li>
-              <li>Queen Creek, Arizona</li>
+            <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Take action</h2>
+            <ul className="mt-5 space-y-3">
               <li>
-                <a href="mailto:hello@soloup.org" className="hover:text-petal transition-colors min-h-[44px] inline-flex items-center">hello@soloup.org</a>
+                <a
+                  href={links.donate}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                >
+                  Donate <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
               </li>
               <li>
-                <a href="https://soloup.org" className="hover:text-petal transition-colors min-h-[44px] inline-flex items-center">soloup.org</a>
+                <a
+                  href={links.interestForm}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                >
+                  Interest list <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </li>
+              <li>
+                <a href="#partner" className="text-white/75 transition-colors hover:text-white">
+                  Employer partnership
+                </a>
+              </li>
+              <li>
+                <a
+                  href={links.volunteer}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                >
+                  Volunteer <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={links.cultivateGoodness}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
+                >
+                  Cultivate Goodness <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
               </li>
             </ul>
-            <div className="mt-5 flex gap-2">
-              {["Instagram", "Facebook", "YouTube"].map((s) => (
-                <a
-                  key={s}
-                  href="#share"
-                  aria-label={s}
-                  className="grid place-items-center w-11 h-11 rounded-full bg-mist/10 border border-mist/20 hover:bg-petal hover:text-forest transition-colors min-w-[44px] text-xs font-bold"
-                >
-                  {s[0]}
-                </a>
-              ))}
-            </div>
+
+            {hasContact && (
+              <ul className="mt-7 space-y-3 border-t border-white/15 pt-6 text-white/75">
+                {contact.email && (
+                  <li className="flex items-start gap-2.5">
+                    <Mail className="mt-1 h-4 w-4 shrink-0 text-lime" aria-hidden="true" />
+                    <a href={`mailto:${contact.email}`} className="hover:text-white">{contact.email}</a>
+                  </li>
+                )}
+                {contact.phone && (
+                  <li className="flex items-start gap-2.5">
+                    <Phone className="mt-1 h-4 w-4 shrink-0 text-lime" aria-hidden="true" />
+                    <a href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white">
+                      {contact.phone}
+                    </a>
+                  </li>
+                )}
+                {contact.addressLines && (
+                  <li className="flex items-start gap-2.5">
+                    <MapPin className="mt-1 h-4 w-4 shrink-0 text-lime" aria-hidden="true" />
+                    <span>
+                      {contact.addressLines.map((line) => (
+                        <span key={line} className="block">{line}</span>
+                      ))}
+                    </span>
+                  </li>
+                )}
+              </ul>
+            )}
           </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-mist/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-mist/55">
-          <p>© {new Date().getFullYear()} SoloUp · A program of Cultivate Goodness. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-petal transition-colors min-h-[44px] inline-flex items-center">Privacy</a>
-            <a href="#" className="hover:text-petal transition-colors min-h-[44px] inline-flex items-center">Terms</a>
-            <a href="#" className="hover:text-petal transition-colors min-h-[44px] inline-flex items-center">Accessibility</a>
-          </div>
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm leading-relaxed text-white/60">
+            © {year} {org.name} — a program of{' '}
+            <a href={links.cultivateGoodness} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+              {org.parentProgram}
+            </a>{' '}
+            at{' '}
+            <a href={links.parentSite} target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+              {org.parentOrg}
+            </a>
+            .
+            {contact.ein && <span className="block sm:inline"> 501(c)(3) EIN {contact.ein}.</span>}
+          </p>
+          <a
+            href={links.donate}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 font-bold text-navy transition-transform hover:-translate-y-0.5"
+          >
+            <Heart className="h-4.5 w-4.5" aria-hidden="true" />
+            Support SoloUp
+          </a>
         </div>
       </div>
     </footer>
