@@ -11,7 +11,7 @@ const badges = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden grad-hero text-white">
+    <section id="top" className="on-dark relative overflow-hidden grad-hero text-white">
       {/* Decorative growth arcs — echoes the arrow in the SoloUp mark. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.14]">
         <svg className="h-full w-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
@@ -91,7 +91,7 @@ export default function Hero() {
             >
               <a
                 href="#involved"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-bold text-carbon shadow-brand-lg transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-lg font-black text-carbon transition-transform hover:-translate-y-0.5"
               >
                 Join the Movement
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -126,7 +126,8 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.18 }}
             className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            <div className="rounded-[2rem] border border-white/15 bg-white/10 p-8 backdrop-blur-sm sm:p-10">
+            {/* The logo's own keyline box, reused as the frame. */}
+            <div className="keyline-light bg-white/10 p-8 backdrop-blur-sm sm:p-10">
               <img
                 src="/brand/soloup-logo.png"
                 width={480}
@@ -134,11 +135,26 @@ export default function Hero() {
                 alt=""
                 className="logo-invert w-full"
               />
-              <p className="mt-8 border-t border-white/20 pt-6 text-center font-alt text-base leading-relaxed text-white/85">
+              <p className="mt-8 border-t-2 border-white/25 pt-6 text-center text-base leading-relaxed text-white/85">
                 Every participant starts somewhere. SoloUp makes sure that somewhere
                 leads onward — to work, to community, to a life they choose.
               </p>
             </div>
+
+            {/* The arrow that breaks out of the top of the mark. */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 64 92"
+              className="absolute -right-3 -top-9 h-24 w-auto text-gold sm:-right-6 sm:-top-12 sm:h-28"
+            >
+              <path
+                d="M32 2 L60 34 H44 V90 H20 V34 H4 Z"
+                fill="currentColor"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinejoin="round"
+              />
+            </svg>
           </motion.div>
         </div>
       </div>
