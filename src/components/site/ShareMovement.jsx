@@ -63,6 +63,12 @@ export default function ShareMovement() {
       color: { dark: CARBON, light: CREAM },
     });
 
+    /* The library stamps inline width/height styles on the canvas, which
+       override the layout classes and stretch the preview over the menus
+       below. Clear them so the classes control the display size. */
+    canvas.style.width = '';
+    canvas.style.height = '';
+
     const ctx = canvas.getContext('2d');
     const logo = logoRef.current;
     if (!ctx || !logo) return;
@@ -187,28 +193,30 @@ export default function ShareMovement() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,440px)_1fr] lg:items-start">
+        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,440px)_1fr] lg:items-start">
           {/* QR panel */}
           <div className="rounded-[1.75rem] border border-carbon/10 bg-white p-6 shadow-brand sm:p-8">
             <div className="mx-auto w-full max-w-[320px]">
               <canvas
                 ref={canvasRef}
-                className="aspect-square w-full rounded-2xl border-2 border-carbon/10"
+                /* max-w + h-auto guard against the canvas's 720px intrinsic
+                   size, which can overflow the panel and bury the menus. */
+                className="mx-auto block aspect-square h-auto w-full max-w-[320px] rounded-2xl border-2 border-carbon/10"
                 role="img"
                 aria-label={`QR code linking to ${target.url}`}
               />
             </div>
 
-            <fieldset className="mt-6">
+            <fieldset className="mt-8">
               <legend className="text-sm font-bold uppercase tracking-[0.14em] text-stone">
                 Where should it point?
               </legend>
-              <div className="mt-3 space-y-2">
+              <div className="mt-4 space-y-3">
                 {TARGETS.map((t) => (
                   <label
                     key={t.key}
                     className={[
-                      'flex cursor-pointer items-start gap-3 rounded-2xl border-2 p-3.5 transition-colors',
+                      'flex cursor-pointer items-start gap-3 rounded-2xl border-2 p-4 transition-colors',
                       target.key === t.key ? 'border-ocean bg-sky' : 'border-carbon/10 hover:bg-sky/60',
                     ].join(' ')}
                   >
@@ -229,7 +237,7 @@ export default function ShareMovement() {
               </div>
             </fieldset>
 
-            <div className="mt-5 grid gap-2 sm:grid-cols-2">
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={downloadQr}
