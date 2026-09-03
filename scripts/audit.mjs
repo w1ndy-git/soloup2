@@ -32,15 +32,25 @@ const CONTRAST = `
     const a = window.__lum(fg), b = window.__lum(bg);
     return (Math.max(a,b) + 0.05) / (Math.min(a,b) + 0.05);
   };
+  // Returns the worst-case backdrop: walks ancestors, and if one paints a
+  // gradient, considers every colour stop in it (the least contrasty wins).
   window.__bgOf = (el) => {
     let n = el;
     while (n && n !== document.documentElement) {
-      const bg = getComputedStyle(n).backgroundColor;
-      if (bg && !/rgba\\(0, 0, 0, 0\\)|transparent/.test(bg)) return bg;
+      const cs = getComputedStyle(n);
+      const bi = cs.backgroundImage;
+      if (bi && bi.includes('gradient')) {
+        const stops = bi.match(/rgba?\\([^)]+\\)/g) || [];
+        const solid = stops.filter(s => !/,\\s*0\\s*\\)$/.test(s));
+        if (solid.length) return solid;
+      }
+      const bg = cs.backgroundColor;
+      if (bg && !/rgba\\(0, 0, 0, 0\\)|transparent/.test(bg)) return [bg];
       n = n.parentElement;
     }
-    return 'rgb(255,255,255)';
+    return ['rgb(255,255,255)'];
   };
+  window.__worst = (fg, bgs) => Math.min(...bgs.map(b => window.__ratio(fg, b)));
 `;
 
 const browser = await chromium.launch();
@@ -73,9 +83,10 @@ const fail = [];
       const size = parseFloat(cs.fontSize);
       const weight = Number(cs.fontWeight) || 400;
       const large = size >= 24 || (size >= 18.66 && weight >= 700);
-      const ratio = window.__ratio(cs.color, window.__bgOf(el));
+      const bgs = window.__bgOf(el);
+      const ratio = window.__worst(cs.color, bgs);
       const min = large ? 3 : 4.5;
-      if (ratio < min) out.push({ text: t.slice(0, 52), size: +size.toFixed(1), weight, ratio: +ratio.toFixed(2), min });
+      if (ratio < min) out.push({ text: t.slice(0, 46), size: +size.toFixed(1), weight, fg: cs.color, bg: bgs.join('|').slice(0, 60), ratio: +ratio.toFixed(2), min });
     }
     return out;
   });
