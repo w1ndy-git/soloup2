@@ -17,6 +17,7 @@ module.exports = {
         ocean: 'rgb(var(--ocean) / <alpha-value>)',
         sky: 'rgb(var(--sky) / <alpha-value>)',
         leaf: 'rgb(var(--leaf) / <alpha-value>)',
+        leafbright: 'rgb(var(--leafbright) / <alpha-value>)',
         lime: 'rgb(var(--lime) / <alpha-value>)',
         palegreen: 'rgb(var(--palegreen) / <alpha-value>)',
         gold: 'rgb(var(--gold) / <alpha-value>)',
