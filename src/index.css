@@ -137,14 +137,15 @@
 
   .shadow-brand { box-shadow: var(--shadow-brand); }
 
+  /* Dark surfaces start at the logo's black and warm toward the brand hues. */
   .grad-hero {
-    background-image: linear-gradient(150deg, rgb(var(--navy)), rgb(var(--deepsea)) 55%, rgb(var(--leaf)));
+    background-image: linear-gradient(150deg, rgb(var(--carbon)) 0%, rgb(var(--navy)) 58%, rgb(var(--leaf)) 100%);
   }
   .grad-ocean {
     background-image: linear-gradient(135deg, rgb(var(--ocean)), rgb(var(--leaf)));
   }
   .grad-deep {
-    background-image: linear-gradient(135deg, rgb(var(--ocean)), rgb(var(--navy)));
+    background-image: linear-gradient(135deg, rgb(var(--navy)), rgb(var(--carbon)));
   }
   .grad-lime {
     background-image: linear-gradient(145deg, rgb(var(--lime)), rgb(var(--palegreen)));
