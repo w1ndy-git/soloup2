@@ -1,6 +1,6 @@
 import React from 'react';
 import { Instagram, Facebook, Mail, Phone, MapPin, ExternalLink, Heart } from 'lucide-react';
-import { org, links, contact, navLinks } from '@/lib/siteConfig';
+import { org, links, contact, navLinks, isRegistered501c3 } from '@/lib/siteConfig';
 
 /**
  * Footer.
@@ -164,7 +164,12 @@ export default function Footer() {
               {org.parentOrg}
             </a>
             .
-            {contact.ein && <span className="block sm:inline"> 501(c)(3) EIN {contact.ein}.</span>}
+            {isRegistered501c3 && (
+              <span className="block sm:inline">
+                {' '}Cultivate Goodness, Inc. is a federally recognized 501(c)(3) nonprofit
+                organization{contact.ein ? `, EIN ${contact.ein}` : ''}.
+              </span>
+            )}
           </p>
           <a
             href={links.donate}
